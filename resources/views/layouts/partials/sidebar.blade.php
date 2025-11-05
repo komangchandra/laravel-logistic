@@ -98,6 +98,39 @@
                     </ul>
                 </li>
                 <!-- End Gudang -->
+
+                <!-- Gudang -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-ui-checks-grid"></i>
+                        <p>
+                            Solar Management
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a
+                                href="{{ route('units.index') }}"
+                                class="nav-link"
+                            >
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>All Unit</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                href="./docs/components/main-sidebar.html"
+                                class="nav-link"
+                            >
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Main Sidebar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Gudang -->
+
                 <li class="nav-header">USER MANAGEMENT</li>
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link">

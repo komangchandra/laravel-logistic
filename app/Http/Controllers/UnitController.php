@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Unit;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\User;
 
-class UserController extends Controller
+class UnitController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
     public function index()
     {
-        $users = User::with('roles')->get(); // ambil semua user beserta rolenya
-        return view('users.index', compact('users'));
+        $units = Unit::all();
+        // dd($units);
+        return view('units.index', compact('units'));
     }
 
     /**
@@ -37,7 +36,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Unit $unit)
     {
         //
     }
@@ -45,15 +44,15 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Unit $unit)
     {
-        //
+        return view('units.edit', compact('unit'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Unit $unit)
     {
         //
     }
@@ -61,7 +60,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Unit $unit)
     {
         //
     }
