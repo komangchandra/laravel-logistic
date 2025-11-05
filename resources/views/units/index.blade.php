@@ -15,14 +15,14 @@
     <div class="container-fluid">
         <!--begin::Row-->
         <div class="row">
-            <div class="col-sm-6"><h3 class="mb-0">Menu User</h3></div>
+            <div class="col-sm-6"><h3 class="mb-0">Menu Unit</h3></div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                     <li class="breadcrumb-item">
                         <a href="/dashboard">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Menu User
+                        Menu Unit
                     </li>
                 </ol>
             </div>
@@ -40,10 +40,25 @@
         <div class="row">
             <!--begin::Col-->
             <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+
+                @if (session('success'))
+                    <div class="callout callout-info mb-4" role="aler">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                
+
+                
+
                 <!--begin::Small Box Widget 1-->
                 <div class="card shad ow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 fw-bold text-primary">Tabel User</h6>
+                    <div class="card-header py-3 d-flex align-items-center">
+                        <h6 class="m-0 fw-bold text-primary">Tabel Unit</h6>
+                        <div class="ms-auto">
+                            <a href="{{ route('units.create') }}" class="btn btn-sm btn-primary">
+                                <i class="bi bi-plus-lg"></i> Create Data Unit
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -53,7 +68,7 @@
                                         <th>#</th>
                                         <th>Lambung</th>
                                         <th>Nama</th>
-                                        <th>Status</th>
+                                        <th>Owner</th>
                                         <th>Area</th>
                                         <th>##</th>
                                     </tr>
@@ -63,7 +78,7 @@
                                         <th>#</th>
                                         <th>Lambung</th>
                                         <th>Nama</th>
-                                        <th>Status</th>
+                                        <th>Owner</th>
                                         <th>Area</th>
                                         <th>##</th>
                                     </tr>
@@ -78,11 +93,19 @@
                                             <td>{{ $unit->area }}</td>
                                             <td>
                                                 <a href="{{ route('units.edit', $unit->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                <form action="{{ route('units.destroy', $unit->id) }}" method="POST" style="display:inline;">
+                                                <!-- <form action="{{ route('units.destroy', $unit->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                                </form> -->
+                                                <form action="{{ route('units.destroy', $unit->id) }}" method="POST" class="d-inline delete-form">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-sm btn-danger btn-delete" data-id="{{ $unit->id }}">
+                                                        Hapus
+                                                    </button>
                                                 </form>
+
                                             </td>
                                         </tr>
                                     @empty
@@ -118,6 +141,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     $(document).ready(function () {
         $("#dataTable").DataTable({
@@ -128,6 +154,27 @@
             dom: "Bfrtip",
             buttons: ["excel", "pdf", "print"],
         });
+
+        // SweetAlert konfirmasi delete
+        $('.btn-delete').on('click', function (e) {
+            e.preventDefault();
+            let form = $(this).closest('form');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit(); 
+            }
+        });
+    });
     });
 </script>
 @endpush

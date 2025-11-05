@@ -22,7 +22,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        //
+        return view('units.create');
     }
 
     /**
@@ -30,7 +30,21 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'unit_id' => 'required',
+            'unit_name' => 'required',
+            'status' => 'required',
+            'area' => 'required',
+        ]);
+
+        Unit::create([
+            'unit_id' => $request->unit_id,
+            'unit_name' => $request->unit_name,
+            'status' => $request->status,
+            'area' => $request->area,
+        ]);
+
+        return redirect()->route('units.index')->with('success', 'Unit created successfully.');
     }
 
     /**
@@ -62,6 +76,7 @@ class UnitController extends Controller
      */
     public function destroy(Unit $unit)
     {
-        //
+        $unit->delete();
+        return redirect()->route('units.index')->with('success', 'Unit deleted successfully.');
     }
 }

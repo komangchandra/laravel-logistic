@@ -102,7 +102,7 @@
                 <!-- Gudang -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon bi bi-ui-checks-grid"></i>
+                        <i class="nav-icon bi bi-fuel-pump"></i>
                         <p>
                             Solar Management
                             <i class="nav-arrow bi bi-chevron-right"></i>
@@ -124,7 +124,25 @@
                                 class="nav-link"
                             >
                                 <i class="nav-icon bi bi-circle"></i>
-                                <p>Main Sidebar</p>
+                                <p>Station</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                href="./docs/components/main-sidebar.html"
+                                class="nav-link"
+                            >
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Transaction</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                href="./docs/components/main-sidebar.html"
+                                class="nav-link"
+                            >
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Report</p>
                             </a>
                         </li>
                     </ul>
