@@ -39,4 +39,9 @@
         }
     });
 </script>
+
+<script>
+    const tahunSekarang = new Date().getFullYear();
+    console.log(`&copy; ${tahunSekarang} Komang Chandra Winata. Semua hak dilindungi.`);
+</script>
 <!--end::OverlayScrollbars Configure-->
