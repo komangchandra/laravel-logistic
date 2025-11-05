@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StationController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -29,5 +30,14 @@ Route::controller(UnitController::class)->group(function () {
     Route::post('/dashboard/units/store', 'store')->name('units.store')->middleware('auth');
     Route::delete('/dashboard/units/{unit}/destroy', 'destroy')->name('units.destroy')->middleware('auth');
 });
+
+// Station Management Routes
+Route::controller(StationController::class)->group(function () {
+    Route::get('/dashboard/stations', 'index')->name('stations.index')->middleware('auth');
+    Route::get('/dashboard/stations/{station}/edit', 'edit')->name('stations.edit')->middleware('auth');
+    Route::get('/dashboard/stations/create', 'create')->name('stations.create')->middleware('auth');
+    Route::post('/dashboard/stations/store', 'store')->name('stations.store')->middleware('auth');
+    Route::delete('/dashboard/stations/{station}/destroy', 'destroy')->name('stations.destroy')->middleware('auth');
+});  
 
 require __DIR__.'/auth.php';

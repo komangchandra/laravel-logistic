@@ -120,7 +120,7 @@
                         </li>
                         <li class="nav-item">
                             <a
-                                href="./docs/components/main-sidebar.html"
+                                href="{{ route('stations.index') }}"
                                 class="nav-link"
                             >
                                 <i class="nav-icon bi bi-circle"></i>
