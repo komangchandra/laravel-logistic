@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Station;
 use App\Models\Transaction;
+use App\Models\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class TransactionController extends Controller
 {
@@ -12,7 +15,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $transactions = Transaction::with('unit', 'station')->latest()->get();
+        return view('transactions.index', compact('transactions'));
     }
 
     /**
@@ -20,7 +24,9 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        $units = Unit::all();
+        $stations = Station::all();
+        return view('transactions.create', compact('units', 'stations'));
     }
 
     /**
@@ -28,7 +34,28 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'transaction_type' => 'required',
+            'unit_id' => 'required|exists:units,id',
+            'station_id' => 'required|exists:stations,id',
+            'flowmeter_start' => 'required',
+            'flowmeter_end' => 'required',
+            'hour_meter' => 'required',
+            'driver_name' => 'required',
+            'fuelman' => 'required',
+            'remarks' => 'required',
+        ]);
+
+        // 🧮 Hitung nilai otomatis
+        $validatedData['volume'] = $validatedData['flowmeter_end'] - $validatedData['flowmeter_start'];
+
+        // 🕒 Set tanggal & waktu otomatis
+        $validatedData['transaction_date'] = Carbon::now();
+        $validatedData['transaction_time'] = Carbon::now();
+
+        Transaction::create($validatedData);
+
+        return redirect()->route('transactions.index')->with('success', 'Transaction created successfully.');
     }
 
     /**
@@ -60,6 +87,7 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->delete();
+        return redirect()->route('transactions.index')->with('success', 'Transaction deleted successfully.');
     }
 }

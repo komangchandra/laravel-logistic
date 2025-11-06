@@ -30,7 +30,7 @@
                 id="navigation">
 
                 <li class="nav-item">
-                    <a href="/dashboard" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>Dashboard</p>
                     </a>
@@ -69,7 +69,7 @@
                 <!-- End Purchasing -->
                 <!-- Gudang -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link ">
                         <i class="nav-icon bi bi-ui-checks-grid"></i>
                         <p>
                             Gudang
@@ -99,9 +99,9 @@
                 </li>
                 <!-- End Gudang -->
 
-                <!-- Gudang -->
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <!-- Solar -->
+                <li class="nav-item {{ Request::is('dashboard/units*') || Request::is('dashboard/stations*') || Request::is('dashboard/transactions*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ Request::is('dashboard/units*') || Request::is('dashboard/stations*') || Request::is('dashboard/transactions*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-fuel-pump"></i>
                         <p>
                             Solar Management
@@ -112,7 +112,7 @@
                         <li class="nav-item">
                             <a
                                 href="{{ route('units.index') }}"
-                                class="nav-link"
+                                class="nav-link {{ Request::is('dashboard/units*') ? 'active' : '' }}"
                             >
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>All Unit</p>
@@ -121,7 +121,7 @@
                         <li class="nav-item">
                             <a
                                 href="{{ route('stations.index') }}"
-                                class="nav-link"
+                                class="nav-link {{ Request::is('dashboard/stations*') ? 'active' : '' }}"
                             >
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Station</p>
@@ -129,8 +129,8 @@
                         </li>
                         <li class="nav-item">
                             <a
-                                href="./docs/components/main-sidebar.html"
-                                class="nav-link"
+                                href="{{ route('transactions.index') }}"
+                                class="nav-link {{ Request::is('dashboard/transactions*') ? 'active' : '' }}"
                             >
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Transaction</p>
@@ -147,7 +147,7 @@
                         </li>
                     </ul>
                 </li>
-                <!-- End Gudang -->
+                <!-- End Solar -->
 
                 <li class="nav-header">USER MANAGEMENT</li>
                 <li class="nav-item">

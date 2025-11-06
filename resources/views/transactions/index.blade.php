@@ -1,4 +1,4 @@
-@extends('layouts.app') @section('title', 'Dashboard - Station') @push('css')
+@extends('layouts.app') @section('title', 'Dashboard - Transaction') @push('css')
 <link
     rel="stylesheet"
     href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css"
@@ -15,14 +15,14 @@
     <div class="container-fluid">
         <!--begin::Row-->
         <div class="row">
-            <div class="col-sm-6"><h3 class="mb-0">Menu Station</h3></div>
+            <div class="col-sm-6"><h3 class="mb-0">Menu Transaction</h3></div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                     <li class="breadcrumb-item">
                         <a href="/dashboard">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Menu Station
+                        Menu Transaction
                     </li>
                 </ol>
             </div>
@@ -55,7 +55,7 @@
                     <div class="card-header py-3 d-flex align-items-center">
                         <h6 class="m-0 fw-bold text-primary">Tabel Station</h6>
                         <div class="ms-auto">
-                            <a href="{{ route('stations.create') }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('transactions.create') }}" class="btn btn-sm btn-primary">
                                 <i class="bi bi-plus-lg"></i> Create Data Station
                             </a>
                         </div>
@@ -65,43 +65,67 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Nama Station</th>
-                                        <th>Sounding</th>
+                                        <th>ID Transaksi</th>
+                                        <th>Tanggal</th>
+                                        <th>Jam</th>
+                                        <th>Shift</th>
+                                        <th>Jenis Transaksi</th>
+                                        <th>Nama Unit</th>
+                                        <th>Station</th>
+                                        <th>Flow Awal</th>
+                                        <th>Flow Akhir</th>
+                                        <th>Volume</th>
+                                        <th>Remakrk</th>
                                         <th>##</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Nama Station</th>
-                                        <th>Sounding</th>
+                                        <th>ID Transaksi</th>
+                                        <th>Tanggal</th>
+                                        <th>Jam</th>
+                                        <th>Shift</th>
+                                        <th>Jenis Transaksi</th>
+                                        <th>Nama Unit</th>
+                                        <th>Station</th>
+                                        <th>Flow Awal</th>
+                                        <th>Flow Akhir</th>
+                                        <th>Volume</th>
+                                        <th>Remakrk</th>
                                         <th>##</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    @forelse ($stations as $station)
+                                    @forelse ($transactions as $transaction)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $station->station_name }}</td>
-                                            <td>{{ $station->sounding }}</td>
+                                            <td>{{ $transaction->id }}</td>
+                                            <td>{{ $transaction->formatted_date }}</td>
+                                            <td>{{ $transaction->formatted_time }}</td>
+                                            <td>{{ $transaction->shift }}</td>
+                                            <td>{{ $transaction->transaction_type }}</td>
+                                            <td>{{ $transaction->unit->unit_name ?? '-' }}</td>
+                                            <td>{{ $transaction->station->station_name ?? '-' }}</td>
+                                            <td>{{ number_format($transaction->flowmeter_start) }}</td>
+                                            <td>{{ number_format($transaction->flowmeter_end) }}</td>
+                                            <td>{{ number_format($transaction->volume) }}</td>
+                                            <td>{{ $transaction->remarks ?? '-' }}</td>
                                             <td>
-                                                <a href="{{ route('stations.edit', $station->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                <form action="{{ route('stations.destroy', $station->id) }}" method="POST" class="d-inline delete-form">
+                                                <a href="{{ route('transactions.edit', $transaction->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                <form action="{{ route('transactions.destroy', $transaction->id) }}" method="POST" class="d-inline delete-form">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button" class="btn btn-sm btn-danger btn-delete" data-id="{{ $station->id }}">
+                                                    <button type="button" class="btn btn-sm btn-danger btn-delete" data-id="{{ $transaction->id }}">
                                                         Hapus
                                                     </button>
                                                 </form>
-
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center">Belum ada station</td>
+                                            <td colspan="12" class="text-center">Belum ada transaksi</td>
                                         </tr>
                                     @endforelse
+
                                 </tbody>
                             </table>
 

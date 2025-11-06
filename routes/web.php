@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StationController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,16 @@ Route::controller(StationController::class)->group(function () {
     Route::get('/dashboard/stations/create', 'create')->name('stations.create')->middleware('auth');
     Route::post('/dashboard/stations/store', 'store')->name('stations.store')->middleware('auth');
     Route::delete('/dashboard/stations/{station}/destroy', 'destroy')->name('stations.destroy')->middleware('auth');
-});  
+});
+
+// Transaction Management Routes
+Route::controller(TransactionController::class)->group(function () {
+    Route::get('/dashboard/transactions', 'index')->name('transactions.index')->middleware('auth');
+    Route::get('/dashboard/transactions/{transaction}/edit', 'edit')->name('transactions.edit')->middleware('auth');
+    Route::patch('/dashboard/transactions/{transaction}/update', 'update')->name('transactions.update')->middleware('auth');
+    Route::get('/dashboard/transactions/create', 'create')->name('transactions.create')->middleware('auth');
+    Route::post('/dashboard/transactions/store', 'store')->name('transactions.store')->middleware('auth');
+    Route::delete('/dashboard/transactions/{transaction}/destroy', 'destroy')->name('transactions.destroy')->middleware('auth');
+});
 
 require __DIR__.'/auth.php';

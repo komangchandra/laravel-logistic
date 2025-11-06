@@ -1,4 +1,4 @@
-@extends('layouts.app') @section('title', 'Dashboard - Units') @push('css')
+@extends('layouts.app') @section('title', 'Dashboard - Station') @push('css')
 <link
     rel="stylesheet"
     href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css"
@@ -22,7 +22,10 @@
                         <a href="{{ route('dashboard') }}">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Menu Station
+                        <a href="{{ route('stations.index') }}">Menu Station</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Create Station
                     </li>
                 </ol>
             </div>
