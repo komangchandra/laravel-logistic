@@ -19,10 +19,13 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                     <li class="breadcrumb-item">
-                        <a href="/dashboard">Dashboard</a>
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Menu Unit
+                        <a href="{{ route('units.index') }}">Menu Unit</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Edit Unit
                     </li>
                 </ol>
             </div>
@@ -40,6 +43,12 @@
         <div class="row">
             <!--begin::Col-->
             <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
+
+                @if (session('error'))
+                    <div class="callout callout-danger mb-4" role="aler">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 
                 <!--begin::Horizontal Form-->
                 <div class="card card-primary card-outline mb-4">
@@ -47,14 +56,21 @@
                 <div class="card-header"><div class="card-title">Edit Unit Form</div></div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                <form action="{{ route('units.store') }}" method="POST">
+                <form action="{{ route('units.update', $unit->id) }}" method="POST">
+                    @method('PATCH')
                     @csrf
                     <!--begin::Body-->
                     <div class="card-body">
                         <div class="row mb-3">
-                            <label for="unit_id" class="col-sm-5 col-form-label">Nomor Lambung</label>
+                            <label for="unit_id" class="col-sm-5 col-form-label">ID Kartu</label>
                             <div class="col-sm-7">
                             <input type="text" class="form-control" id="unit_id" name="unit_id" value="{{ old('unit_id', $unit->unit_id) }}" required/>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="nomor_lambung" class="col-sm-5 col-form-label">Nomor Lambung</label>
+                            <div class="col-sm-7">
+                            <input type="text" class="form-control" id="nomor_lambung" name="nomor_lambung" value="{{ old('nomor_lambung', $unit->nomor_lambung) }}" required/>
                             </div>
                         </div>
                         <div class="row mb-3">

@@ -19,10 +19,13 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                     <li class="breadcrumb-item">
-                        <a href="/dashboard">Dashboard</a>
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Menu Unit
+                        <a href="{{ route('units.index') }}">Menu Unit</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Create Unit
                     </li>
                 </ol>
             </div>
@@ -40,6 +43,12 @@
         <div class="row">
             <!--begin::Col-->
             <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
+
+                @if (session('error'))
+                    <div class="callout callout-danger mb-4" role="aler">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 
                 <!--begin::Horizontal Form-->
                 <div class="card card-primary card-outline mb-4">
@@ -52,9 +61,15 @@
                     <!--begin::Body-->
                     <div class="card-body">
                         <div class="row mb-3">
-                            <label for="unit_id" class="col-sm-5 col-form-label">Nomor Lambung</label>
+                            <label for="unit_id" class="col-sm-5 col-form-label">ID Kartu</label>
                             <div class="col-sm-7">
-                            <input type="text" class="form-control" id="unit_id" name="unit_id" required/>
+                            <input type="text" class="form-control" id="unit_id" name="unit_id" placeholder="Tempelkan kartu.." required/>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="nomor_lambung" class="col-sm-5 col-form-label">Nomor Lambung</label>
+                            <div class="col-sm-7">
+                            <input type="text" class="form-control" id="nomor_lambung" name="nomor_lambung" required/>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -120,4 +135,23 @@
         });
     });
 </script>
+
+<script>
+    if ("NDEFReader" in window) {
+    const reader = new NDEFReader();
+    reader.scan().then(() => {
+        reader.onreading = event => {
+        const serial = event.serialNumber; // ID dari kartu NFC
+        document.getElementById("unit_id").value = serial;
+        };
+    }).catch(error => {
+        alert("Tidak bisa membaca NFC: " + error);
+    });
+    } 
+    else {
+    console.log("Perangkat ini tidak mendukung Web NFC")
+    }
+</script>
+
+
 @endpush

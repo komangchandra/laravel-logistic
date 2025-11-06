@@ -66,6 +66,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>ID Kartu</th>
                                         <th>Lambung</th>
                                         <th>Nama</th>
                                         <th>Owner</th>
@@ -76,6 +77,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>#</th>
+                                        <th>ID Kartu</th>
                                         <th>Lambung</th>
                                         <th>Nama</th>
                                         <th>Owner</th>
@@ -88,6 +90,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $unit->unit_id }}</td>
+                                            <td>{{ $unit->nomor_lambung }}</td>
                                             <td>{{ $unit->unit_name }}</td>
                                             <td>{{ $unit->status }}</td>
                                             <td>{{ $unit->area }}</td>

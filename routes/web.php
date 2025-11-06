@@ -26,6 +26,7 @@ Route::resource('users', UserController::class)->middleware(['auth', 'verified']
 Route::controller(UnitController::class)->group(function () {
     Route::get('/dashboard/units', 'index')->name('units.index')->middleware('auth');
     Route::get('/dashboard/units/{unit}/edit', 'edit')->name('units.edit')->middleware('auth');
+    Route::patch('/dashboard/units/{unit}/update', 'update')->name('units.update')->middleware('auth');
     Route::get('/dashboard/units/create', 'create')->name('units.create')->middleware('auth');
     Route::post('/dashboard/units/store', 'store')->name('units.store')->middleware('auth');
     Route::delete('/dashboard/units/{unit}/destroy', 'destroy')->name('units.destroy')->middleware('auth');
