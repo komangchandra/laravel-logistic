@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="station_id" class="col-sm-5 col-form-label">Unit</label>
+                            <label for="station_id" class="col-sm-5 col-form-label">Station</label>
                             <div class="col-sm-7">
                             <select class="form-select" id="station_id" name="station_id" required>
                                 <option selected disabled value="">Pilih station..</option>
