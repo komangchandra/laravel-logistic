@@ -28,9 +28,17 @@ class UnitController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $unit_id)
     {
-        //
+        $unit = Unit::where('unit_id', $unit_id)->first();
+
+        if (!$unit) {
+            return response()->json([
+                'message' => 'Unit not found'
+            ], 404);
+        }
+
+        return response()->json($unit);
     }
 
     /**
