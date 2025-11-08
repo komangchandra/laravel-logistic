@@ -104,7 +104,7 @@
                     <!--begin::Menu Footer-->
                     <li class="user-footer">
                         <a
-                            href="route('profile.edit')"
+                            href="{{ route('profile.edit')}}"
                             class="btn btn-default btn-flat"
                             >Profile</a
                         >

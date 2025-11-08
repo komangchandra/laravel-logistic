@@ -67,7 +67,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Nama Station</th>
-                                        <th>Sounding</th>
+                                        <th>Fuel Rate</th>
+                                        <th>Update Terakhir</th>
                                         <th>##</th>
                                     </tr>
                                 </thead>
@@ -75,7 +76,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Nama Station</th>
-                                        <th>Sounding</th>
+                                        <th>Fuel Rate</th>
+                                        <th>Update Terakhir</th>
                                         <th>##</th>
                                     </tr>
                                 </tfoot>
@@ -85,6 +87,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $station->station_name }}</td>
                                             <td>{{ $station->sounding }}</td>
+                                            <td>{{ $station->updated_at }}</td>
                                             <td>
                                                 <a href="{{ route('stations.edit', $station->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                                 <form action="{{ route('stations.destroy', $station->id) }}" method="POST" class="d-inline delete-form">

@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="sounding" class="col-sm-5 col-form-label">Sounding</label>
+                            <label for="sounding" class="col-sm-5 col-form-label">Fuel Rate</label>
                             <div class="col-sm-7">
                             <input type="text" class="form-control" id="sounding" name="sounding" required/>
                             </div>
