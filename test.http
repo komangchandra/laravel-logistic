@@ -12,3 +12,21 @@ content-type: application/json
   "fuelman": "Budi",
   "remarks": "Coal Getting"
 }
+
+###
+
+https://gpu.komangchandra.my.id/laravel-logistic/public/api/transactions HTTP/1.1
+
+content-type: application/json
+
+{
+  "transaction_type": "Kartu",
+  "unit_id": 1,
+  "station_id": 2,
+  "flowmeter_start": 100,
+  "flowmeter_end": 150,
+  "hour_meter": 200,
+  "driver_name": "Agus Santoso",
+  "fuelman": "Budi",
+  "remarks": "Coal Getting"
+}

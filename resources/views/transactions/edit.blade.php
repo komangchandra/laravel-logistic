@@ -25,7 +25,7 @@
                         <a href="{{ route('transactions.index') }}">Menu Transaction</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Create Transaction
+                        Edit Transaction
                     </li>
                 </ol>
             </div>
@@ -50,19 +50,18 @@
                 <div class="card-header"><div class="card-title">Transaction Form</div></div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                <form action="{{ route('transactions.store') }}" method="POST">
+                <form action="{{ route('transactions.update', $transaction->id) }}" method="POST">
+                    @method('PATCH')
                     @csrf
                     <!--begin::Body-->
                     <div class="card-body">
                         <div class="row mb-3">
                             <label for="transaction_type" class="col-sm-5 col-form-label">Jenis Transaksi</label>
                             <div class="col-sm-7">
-                            <select class="form-select" id="transaction_type" name="transaction_type" required>
-                                <option selected disabled value="">Pilih jenis transaksi..</option>
-                                <option disabled value="Kartu">Kartu</option>
-                                <option disabled value="Voucher">Voucher</option>
-                                <option value="Manual">Manual</option>
-                            </select>
+                            <input type="text" class="form-control" id="transaction_type" name="transaction_type" 
+                                value="{{ old('transaction_type', $transaction->transaction_type) }}" 
+                                required 
+                                disabled/>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -71,7 +70,10 @@
                             <select class="form-select" id="unit_id" name="unit_id" required>
                                 <option selected disabled value="">Pilih unit..</option>
                                 @foreach($units as $unit)
-                                    <option value="{{ $unit->id }}">{{ $unit->nomor_lambung }} - {{ $unit->status }}</option>
+                                    <option value="{{ $unit->id }}" 
+                                        {{ old('unit_id', $transaction->unit_id) == $unit->id ? 'selected' : '' }}>
+                                        {{ $unit->nomor_lambung }} - {{ $unit->status }}
+                                    </option>
                                 @endforeach
                             </select>
                             </div>
@@ -82,7 +84,9 @@
                             <select class="form-select" id="station_id" name="station_id" required>
                                 <option selected disabled value="">Pilih station..</option>
                                 @foreach($stations as $station)
-                                    <option value="{{ $station->id }}">{{ $station->station_name }}</option>
+                                    <option value="{{ $station->id }}"
+                                    {{ old('station_id', $transaction->station_id) == $station->id ? 'selected' : '' }}>
+                                    {{ $station->station_name }}</option>
                                 @endforeach
                             </select>
                             </div>
@@ -90,37 +94,49 @@
                         <div class="row mb-3">
                             <label for="flowmeter_start" class="col-sm-5 col-form-label">Flow Awal</label>
                             <div class="col-sm-7">
-                            <input type="number" class="form-control" id="flowmeter_start" name="flowmeter_start" required/>
+                            <input type="number" class="form-control" id="flowmeter_start" name="flowmeter_start" 
+                                value="{{ old('flowmeter_start', $transaction->flowmeter_start) }}" 
+                                required/>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="flowmeter_end" class="col-sm-5 col-form-label">Flow Akhir</label>
                             <div class="col-sm-7">
-                            <input type="number" class="form-control" id="flowmeter_end" name="flowmeter_end" required/>
+                            <input type="number" class="form-control" id="flowmeter_end" name="flowmeter_end" 
+                                value="{{ old('flowmeter_end', $transaction->flowmeter_end) }}"
+                                required/>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="hour_meter" class="col-sm-5 col-form-label">HM/KM</label>
                             <div class="col-sm-7">
-                            <input type="number" class="form-control" id="hour_meter" name="hour_meter" required/>
+                            <input type="number" class="form-control" id="hour_meter" name="hour_meter"
+                                value="{{ old('hour_meter', $transaction->hour_meter) }}"
+                                required/>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="driver_name" class="col-sm-5 col-form-label">Nama Driver</label>
                             <div class="col-sm-7">
-                            <input type="text" class="form-control" id="driver_name" name="driver_name" required/>
+                            <input type="text" class="form-control" id="driver_name" name="driver_name"
+                                value="{{ old('driver_name', $transaction->driver_name) }}"
+                                required/>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="fuelman" class="col-sm-5 col-form-label">Nama Fuel Man</label>
                             <div class="col-sm-7">
-                            <input type="text" class="form-control" id="fuelman" name="fuelman" required/>
+                            <input type="text" class="form-control" id="fuelman" name="fuelman"
+                                value="{{ old('fuelman', $transaction->fuelman) }}"
+                                required/>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="remarks" class="col-sm-5 col-form-label">Remarks</label>
                             <div class="col-sm-7">
-                            <input type="text" class="form-control" id="remarks" name="remarks" required/>
+                            <input type="text" class="form-control" id="remarks" name="remarks"
+                                value="{{ old('remarks', $transaction->remarks) }}"
+                                required/>
                             </div>
                         </div>
 
@@ -128,7 +144,7 @@
                     <!--end::Body-->
                     <!--begin::Footer-->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Save Data Transaksi</button>
+                        <button type="submit" class="btn btn-primary">Update Data Transaksi</button>
                     </div>
                     <!--end::Footer-->
                 </form>

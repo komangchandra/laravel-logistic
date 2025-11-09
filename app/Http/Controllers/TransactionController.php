@@ -63,7 +63,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        // return view('transactions.show', compact('transaction'));
     }
 
     /**
@@ -71,7 +71,9 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        $units = Unit::all();
+        $stations = Station::all();
+        return view('transactions.edit', compact('transaction', 'units', 'stations'));
     }
 
     /**
@@ -79,7 +81,32 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        //
+        $validatedData = $request->validate([
+            'unit_id' => 'required|exists:units,id',
+            'station_id' => 'required|exists:stations,id',
+            'flowmeter_start' => 'required',
+            'flowmeter_end' => 'required',
+            'hour_meter' => 'required',
+            'driver_name' => 'required',
+            'fuelman' => 'required',
+            'remarks' => 'required',
+        ]);
+
+        // 🧮 Hitung volume otomatis
+        $validatedData['volume'] = $validatedData['flowmeter_end'] - $validatedData['flowmeter_start'];
+
+        // 🕒 Perbarui tanggal & waktu transaksi jika perlu
+        $validatedData['transaction_date'] = Carbon::now();
+        $validatedData['transaction_time'] = Carbon::now();
+
+        // Jangan ubah transaction_type, gunakan yang lama
+        $validatedData['transaction_type'] = $transaction->transaction_type;
+
+        // Update transaction
+        $transaction->update($validatedData);
+
+        return redirect()->route('transactions.index')
+                        ->with('success', 'Transaction updated successfully.');
     }
 
     /**
