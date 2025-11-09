@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\StationController;
+use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\UnitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,4 +16,8 @@ Route::name('api.')->group(function () {
 
 Route::name('api.')->group(function () {
     Route::apiResource('stations', StationController::class);
+});
+
+Route::name('api.')->group(function () {
+    Route::apiResource('transactions', TransactionController::class);
 });
