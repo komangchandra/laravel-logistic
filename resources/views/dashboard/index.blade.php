@@ -31,8 +31,8 @@
                 <!--begin::Small Box Widget 1-->
                 <div class="small-box text-bg-primary">
                     <div class="inner">
-                        <h3>150</h3>
-                        <p>New Orders</p>
+                        <h3>{{ $unitsCount }} Unit</h3>
+                        <p>Total Unit (Alat Berat & Genset)</p>
                     </div>
                     <svg
                         class="small-box-icon"
@@ -46,7 +46,7 @@
                         ></path>
                     </svg>
                     <a
-                        href="#"
+                        href="{{ route('units.index') }}"
                         class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                     >
                         More info <i class="bi bi-link-45deg"></i>
@@ -59,8 +59,8 @@
                 <!--begin::Small Box Widget 2-->
                 <div class="small-box text-bg-success">
                     <div class="inner">
-                        <h3>53<sup class="fs-5">%</sup></h3>
-                        <p>Bounce Rate</p>
+                        <h3>{{ $stationsCount }}</h3>
+                        <p>Total Station</p>
                     </div>
                     <svg
                         class="small-box-icon"
@@ -74,7 +74,7 @@
                         ></path>
                     </svg>
                     <a
-                        href="#"
+                        href="{{ route('stations.index') }}"
                         class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                     >
                         More info <i class="bi bi-link-45deg"></i>
@@ -87,8 +87,8 @@
                 <!--begin::Small Box Widget 3-->
                 <div class="small-box text-bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
-                        <p>User Registrations</p>
+                        <h3>{{$transactionsCount}}</h3>
+                        <p>Total Transaksi</p>
                     </div>
                     <svg
                         class="small-box-icon"
@@ -115,8 +115,8 @@
                 <!--begin::Small Box Widget 4-->
                 <div class="small-box text-bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
-                        <p>Unique Visitors</p>
+                        <h3>{{ $transactionsCountNow }}</h3>
+                        <p>Transaksi Hari Ini</p>
                     </div>
                     <svg
                         class="small-box-icon"
