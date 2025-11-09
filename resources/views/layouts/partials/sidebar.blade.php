@@ -36,6 +36,8 @@
                     </a>
                 </li>
                 <li class="nav-header">MENU</li>
+
+                @role('Super Admin|Direktur')
                 <!-- Purchasing -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -67,6 +69,9 @@
                     </ul>
                 </li>
                 <!-- End Purchasing -->
+                @endrole
+
+                @role('Super Admin|Direktur')
                 <!-- Gudang -->
                 <li class="nav-item">
                     <a href="#" class="nav-link ">
@@ -98,6 +103,7 @@
                     </ul>
                 </li>
                 <!-- End Gudang -->
+                 @endrole
 
                 <!-- Solar -->
                 <li class="nav-item {{ Request::is('dashboard/units*') || Request::is('dashboard/stations*') || Request::is('dashboard/transactions*') ? 'menu-open' : '' }}">
@@ -136,6 +142,7 @@
                                 <p>Transaction</p>
                             </a>
                         </li>
+                        @role('Super Admin|Direktur')
                         <li class="nav-item">
                             <a
                                 href="./docs/components/main-sidebar.html"
@@ -145,10 +152,12 @@
                                 <p>Report</p>
                             </a>
                         </li>
+                        @endrole
                     </ul>
                 </li>
                 <!-- End Solar -->
 
+                @role('Super Admin')
                 <li class="nav-header">USER MANAGEMENT</li>
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link">
@@ -162,6 +171,7 @@
                         <p>Layout</p>
                     </a>
                 </li>
+                @endrole
             </ul>
             <!--end::Sidebar Menu-->
         </nav>

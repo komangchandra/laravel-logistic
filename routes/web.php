@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('users', UserController::class)->middleware(['auth', 'verified']);
+Route::resource('/dashboard/users', UserController::class)->middleware(['auth', 'verified']);
 
 // Unit Management Routes
 Route::controller(UnitController::class)->group(function () {
