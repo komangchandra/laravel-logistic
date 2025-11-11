@@ -6,6 +6,7 @@ use App\Http\Controllers\StationController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VoucherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -55,6 +56,13 @@ Route::controller(TransactionController::class)->group(function () {
     Route::get('/dashboard/transactions/create', 'create')->name('transactions.create')->middleware('auth');
     Route::post('/dashboard/transactions/store', 'store')->name('transactions.store')->middleware('auth');
     Route::delete('/dashboard/transactions/{transaction}/destroy', 'destroy')->name('transactions.destroy')->middleware('auth');
+});
+
+// Voucher Management Router
+Route::controller(VoucherController::class)->group(function(){
+    Route::get('/dashboard/vouchers', 'index')->name('vouchers.index')->middleware('auth');
+    Route::get('/dashboard/vouchers/create', 'create')->name('transactions.create')->middleware('auth');
+    Route::get('/dashboard/vouchers/store', 'store')->name('transactions.store')->middleware('auth');
 });
 
 require __DIR__.'/auth.php';

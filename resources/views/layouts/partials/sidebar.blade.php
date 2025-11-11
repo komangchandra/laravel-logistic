@@ -106,8 +106,8 @@
                  @endrole
 
                 <!-- Solar -->
-                <li class="nav-item {{ Request::is('dashboard/units*') || Request::is('dashboard/stations*') || Request::is('dashboard/transactions*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ Request::is('dashboard/units*') || Request::is('dashboard/stations*') || Request::is('dashboard/transactions*') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('dashboard/units*') || Request::is('dashboard/stations*') || Request::is('dashboard/vouchers*') || Request::is('dashboard/transactions*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ Request::is('dashboard/units*') || Request::is('dashboard/stations*') || Request::is('dashboard/vouchers*') || Request::is('dashboard/transactions*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-fuel-pump"></i>
                         <p>
                             Solar Management
@@ -131,6 +131,15 @@
                             >
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Station</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                href="{{ route('vouchers.index') }}"
+                                class="nav-link {{ Request::is('dashboard/vouchers*') ? 'active' : '' }}"
+                            >
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Voucher Generate</p>
                             </a>
                         </li>
                         <li class="nav-item">

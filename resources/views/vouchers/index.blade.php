@@ -1,4 +1,4 @@
-@extends('layouts.app') @section('title', 'Dashboard - Units') @push('css')
+@extends('layouts.app') @section('title', 'Dashboard - Station') @push('css')
 <link
     rel="stylesheet"
     href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css"
@@ -15,14 +15,14 @@
     <div class="container-fluid">
         <!--begin::Row-->
         <div class="row">
-            <div class="col-sm-6"><h3 class="mb-0">Menu Unit</h3></div>
+            <div class="col-sm-6"><h3 class="mb-0">Menu Voucher</h3></div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                     <li class="breadcrumb-item">
                         <a href="/dashboard">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Menu Unit
+                        Menu Voucher
                     </li>
                 </ol>
             </div>
@@ -53,10 +53,10 @@
                 <!--begin::Small Box Widget 1-->
                 <div class="card shad ow mb-4">
                     <div class="card-header py-3 d-flex align-items-center">
-                        <h6 class="m-0 fw-bold text-primary">Tabel Unit</h6>
+                        <h6 class="m-0 fw-bold text-primary">Tabel Voucher</h6>
                         <div class="ms-auto">
-                            <a href="{{ route('units.create') }}" class="btn btn-sm btn-primary">
-                                <i class="bi bi-plus-lg"></i> Create Data Unit
+                            <a href="{{ route('stations.create') }}" class="btn btn-sm btn-primary">
+                                <i class="bi bi-plus-lg"></i> Create Data Voucher
                             </a>
                         </div>
                     </div>
@@ -66,45 +66,34 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>ID Kartu</th>
-                                        <th>Lambung</th>
-                                        <th>Nama</th>
-                                        <th>Owner</th>
-                                        <th>Area</th>
+                                        <th>Nama Station</th>
+                                        <th>Fuel Rate</th>
+                                        <th>Update Terakhir</th>
                                         <th>##</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>#</th>
-                                        <th>ID Kartu</th>
-                                        <th>Lambung</th>
-                                        <th>Nama</th>
-                                        <th>Owner</th>
-                                        <th>Area</th>
+                                        <th>Nama Station</th>
+                                        <th>Fuel Rate</th>
+                                        <th>Update Terakhir</th>
                                         <th>##</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    @forelse ($units as $unit)
+                                    @forelse ($stations as $station)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $unit->unit_id }}</td>
-                                            <td>{{ $unit->nomor_lambung }}</td>
-                                            <td>{{ $unit->unit_name }}</td>
-                                            <td>{{ $unit->status }}</td>
-                                            <td>{{ $unit->area }}</td>
+                                            <td>{{ $station->station_name }}</td>
+                                            <td>{{ $station->sounding }}</td>
+                                            <td>{{ $station->updated_at }}</td>
                                             <td>
-                                                <a href="{{ route('units.edit', $unit->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                <!-- <form action="{{ route('units.destroy', $unit->id) }}" method="POST" style="display:inline;">
+                                                <a href="{{ route('stations.edit', $station->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                <form action="{{ route('stations.destroy', $station->id) }}" method="POST" class="d-inline delete-form">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                                </form> -->
-                                                <form action="{{ route('units.destroy', $unit->id) }}" method="POST" class="d-inline delete-form">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button" class="btn btn-sm btn-danger btn-delete" data-id="{{ $unit->id }}">
+                                                    <button type="button" class="btn btn-sm btn-danger btn-delete" data-id="{{ $station->id }}">
                                                         Hapus
                                                     </button>
                                                 </form>
@@ -113,7 +102,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center">Belum ada user</td>
+                                            <td colspan="5" class="text-center">Belum ada station</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -154,27 +143,8 @@
             paging: true,
             searching: true,
             ordering: true,
-            dom: "<'row'<'col-sm-6'l><'col-sm-6 text-end'B>>" +
-                "<'row'<'col-sm-12'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            dom: "Bfrtip",
             buttons: ["excel", "pdf", "print"],
-            lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
-            pageLength: 10, // default tampilan awal (10 baris)
-            language: {
-                lengthMenu: "Tampilkan _MENU_ data per halaman",
-                zeroRecords: "Data tidak ditemukan",
-                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
-                infoEmpty: "Tidak ada data tersedia",
-                infoFiltered: "(difilter dari total _MAX_ data)",
-                search: "Cari:",
-                paginate: {
-                    first: "Awal",
-                    last: "Akhir",
-                    next: "Berikutnya",
-                    previous: "Sebelumnya"
-                },
-            }
         });
 
         // SweetAlert konfirmasi delete
