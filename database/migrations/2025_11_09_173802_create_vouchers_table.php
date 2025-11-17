@@ -13,10 +13,19 @@ return new class extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
-            $table->string('voucher_type');
-            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('unit_name');
+            $table->foreignId('station_id')->constrained()->onDelete('cascade');
+            $table->integer('flowmeter_start');
+            $table->integer('flowmeter_end');
             $table->integer('volume');
-            $table->string('status');
+            $table->float('hour_meter', 8, 2);
+            $table->date('transaction_date')->nullable();
+            $table->time('transaction_time')->nullable();
+            $table->string('driver_name');
+            $table->string('fuelman')->nullable();
+            $table->string('remarks')->nullable();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

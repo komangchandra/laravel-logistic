@@ -139,7 +139,7 @@
                                 class="nav-link {{ Request::is('dashboard/vouchers*') ? 'active' : '' }}"
                             >
                                 <i class="nav-icon bi bi-circle"></i>
-                                <p>Voucher Generate</p>
+                                <p>Voucher</p>
                             </a>
                         </li>
                         <li class="nav-item">

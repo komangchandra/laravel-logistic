@@ -8,8 +8,8 @@ class Voucher extends Model
 {
     protected $guarded = [];
 
-    public function unit()
+    public function user()
     {
-        return $this->belongsTo(Unit::class);
+        return $this->belongsTo(User::class);
     }
 }

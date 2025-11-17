@@ -46,17 +46,14 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                
-
-                
-
+ 
                 <!--begin::Small Box Widget 1-->
                 <div class="card shad ow mb-4">
                     <div class="card-header py-3 d-flex align-items-center">
                         <h6 class="m-0 fw-bold text-primary">Tabel Voucher</h6>
                         <div class="ms-auto">
                             <a href="{{ route('stations.create') }}" class="btn btn-sm btn-primary">
-                                <i class="bi bi-plus-lg"></i> Create Data Voucher
+                                <i class="bi bi-plus-lg"></i> Create Voucher
                             </a>
                         </div>
                     </div>
@@ -66,34 +63,43 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama Station</th>
-                                        <th>Fuel Rate</th>
-                                        <th>Update Terakhir</th>
+                                        <th>Unit</th>
+                                        <th>Station</th>
+                                        <th>Volume</th>
+                                        <th>Pembuat</th>
+                                        <th>Remark</th>
+                                        <th>Status</th>
                                         <th>##</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama Station</th>
-                                        <th>Fuel Rate</th>
-                                        <th>Update Terakhir</th>
+                                        <th>Unit</th>
+                                        <th>Station</th>
+                                        <th>Volume</th>
+                                        <th>Pembuat</th>
+                                        <th>Remark</th>
+                                        <th>Status</th>
                                         <th>##</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    @forelse ($stations as $station)
+                                    @forelse ($vouchers as $voucher)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $station->station_name }}</td>
-                                            <td>{{ $station->sounding }}</td>
-                                            <td>{{ $station->updated_at }}</td>
+                                            <td>{{ $voucher->unit_name }}</td>
+                                            <td>{{ $voucher->station_id->station_name }}</td>
+                                            <td>{{ $voucher->volume }}</td>
+                                            <td>{{ $voucher->user_id->name }}</td>
+                                            <td>{{ $voucher->user_id->remarks }}</td>
+                                            <td>{{ $voucher->user_id->status }}</td>
                                             <td>
-                                                <a href="{{ route('stations.edit', $station->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                <form action="{{ route('stations.destroy', $station->id) }}" method="POST" class="d-inline delete-form">
+                                                <a href="{{ route('vouchers.edit', $voucher->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                <form action="{{ route('vouchers.destroy', $voucher->id) }}" method="POST" class="d-inline delete-form">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button" class="btn btn-sm btn-danger btn-delete" data-id="{{ $station->id }}">
+                                                    <button type="button" class="btn btn-sm btn-danger btn-delete" data-id="{{ $voucher->id }}">
                                                         Hapus
                                                     </button>
                                                 </form>
@@ -102,7 +108,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center">Belum ada station</td>
+                                            <td colspan="5" class="text-center">Belum ada voucher</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
