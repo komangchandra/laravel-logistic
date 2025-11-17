@@ -24,41 +24,65 @@ class UserSeeder extends Seeder
         // Wayan Sujasman - Direktur
         $wayan = User::create([
             'name' => 'Wayan Sujasman',
-            'email' => 'wayan@gmail.com',
-            'password' => Hash::make('wayan12345'),
+            'email' => 'wayans@atlas-coal.co.id',
+            'password' => Hash::make('@Kemang43'),
         ]);
         $wayan->assignRole('Direktur');
 
         // Ferry Juanda - Manager
         $ferry = User::create([
             'name' => 'Ferry Juanda',
-            'email' => 'ferryjuanda@gmail.com',
-            'password' => Hash::make('ferry12345'),
+            'email' => 'ferry.juanda@gorbyputrautama.com',
+            'password' => Hash::make('@Kemang43'),
         ]);
         $ferry->assignRole('Manager');
 
-        // Ananda Wahyu - Manager
+        // Ananda Wahyu - Manager (KTT)
         $ananda = User::create([
             'name' => 'Ananda Wahyu',
-            'email' => 'anandawahyu@gmail.com',
-            'password' => Hash::make('wahyu12345'),
+            'email' => 'ananda.wahyu@gorbyputrautama.com',
+            'password' => Hash::make('@Kemang43'),
         ]);
         $ananda->assignRole('Manager');
 
-        // Made Chendy - Logistic (User)
-        $chendy = User::create([
-            'name' => 'Made Chendy',
-            'email' => 'logistic@gmail.com',
-            'password' => Hash::make('chendy12345'),
+        // Arif Rahman - Manager (KTT)
+        $arif = User::create([
+            'name' => 'Arif Rahman',
+            'email' => 'mineplan@gorbyputrautama.com',
+            'password' => Hash::make('@Kemang43'),
         ]);
-        $chendy->assignRole('Logistic');
+        $arif->assignRole('Manager');
 
-        // Gede Krisna - User
-        $gede = User::create([
-            'name' => 'Gede Krisna',
-            'email' => 'gede@gmail.com',
-            'password' => Hash::make('gede12345'),
+        // Johan Barus - Eng
+        $johan = User::create([
+            'name' => 'Johan P Barus',
+            'email' => '02_mineplan@gorbyputrautama.com',
+            'password' => Hash::make('@Kemang43'),
         ]);
-        $gede->assignRole('User');
+        $johan->assignRole('User');
+        
+        // Rafli - Eng
+        $rafli = User::create([
+            'name' => 'Rafli Ronaldi',
+            'email' => '03_mineplan@gorbyputrautama.com',
+            'password' => Hash::make('@Kemang43'),
+        ]);
+        $rafli->assignRole('User');
+        
+        // Admin - Eng
+        $admineng = User::create([
+            'name' => 'Admin Engineering',
+            'email' => 'admin.engineering@gorbyputrautama.com',
+            'password' => Hash::make('@Kemang43'),
+        ]);
+        $admineng->assignRole('User');
+        
+        // Logistic - Eng
+        $logistik = User::create([
+            'name' => 'Purchasing Officer',
+            'email' => 'logistic@gorbyputrautama.com',
+            'password' => Hash::make('@Kemang43'),
+        ]);
+        $logistik->assignRole('Logistic');
     }
 }
