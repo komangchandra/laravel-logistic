@@ -89,4 +89,11 @@ class VoucherController extends Controller
     {
         //
     }
+
+    public function thermal($id)
+    {
+        $voucher = Voucher::findOrFail($id);
+        return view('vouchers.thermal', compact('voucher'));
+    }
+
 }

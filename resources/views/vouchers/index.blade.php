@@ -143,10 +143,13 @@
                                             >
                                             @endrole
                                             <a
-                                                href="{{ route('vouchers.edit', $voucher->id) }}"
+                                                href="{{ route('vouchers.thermal', $voucher->id) }}"
+                                                target="_blank"
                                                 class="btn btn-sm btn-warning"
-                                                >Print</a
                                             >
+                                                Print
+                                            </a>
+
                                             <form
                                                 action="{{ route('vouchers.destroy', $voucher->id) }}"
                                                 method="POST"
@@ -172,6 +175,52 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
+                            <!-- Modal QR Code -->
+                            <div class="modal fade" id="qrModal" tabindex="-1">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">
+                                                Voucher QR Code
+                                            </h5>
+                                            <button
+                                                type="button"
+                                                class="btn-close"
+                                                data-bs-dismiss="modal"
+                                            ></button>
+                                        </div>
+
+                                        <div class="modal-body text-center">
+                                            <div id="qrCodeBox"></div>
+                                            <p class="mt-3">
+                                                <strong>ID:</strong>
+                                                <span id="qrId"></span>
+                                            </p>
+                                            <p>
+                                                <strong>Unit:</strong>
+                                                <span id="qrUnit"></span>
+                                            </p>
+
+                                            <p>
+                                                <strong>Volume:</strong>
+                                                <span id="qrVolume"></span>
+                                                Liter
+                                            </p>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button
+                                                class="btn btn-primary"
+                                                id="printQr"
+                                            >
+                                                Print
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end::Modal -->
                         </div>
                     </div>
                 </div>
@@ -184,7 +233,10 @@
     <!--end::Container-->
 </div>
 <!--end::App Content-->
-@endsection @push('js')
+@endsection
+
+<!-- js page -->
+@push('js')
 <!-- jQuery wajib dulu -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 

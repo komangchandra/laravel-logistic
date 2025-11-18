@@ -66,6 +66,7 @@ Route::controller(VoucherController::class)->group(function(){
     Route::get('/dashboard/vouchers/{voucher}/edit', 'edit')->name('vouchers.edit')->middleware('auth');
     Route::patch('/dashboard/vouchers/{voucher}/update', 'update')->name('vouchers.update')->middleware('auth');
     Route::delete('/dashboard/vouchers/{voucher}/destroy', 'destroy')->name('vouchers.destroy')->middleware('auth');
+    Route::get('/vouchers/{id}/print', [VoucherController::class, 'thermal'])->name('vouchers.thermal');
 });
 
 require __DIR__.'/auth.php';
