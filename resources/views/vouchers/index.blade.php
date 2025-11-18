@@ -135,13 +135,6 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @role('Super Admin')
-                                            <a
-                                                href="{{ route('vouchers.edit', $voucher->id) }}"
-                                                class="btn btn-sm btn-warning"
-                                                >Edit</a
-                                            >
-                                            @endrole
                                             <a
                                                 href="{{ route('vouchers.thermal', $voucher->id) }}"
                                                 target="_blank"
