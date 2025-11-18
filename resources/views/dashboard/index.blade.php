@@ -150,7 +150,7 @@
             title: { text: 'Tanggal' }
         },
         yaxis: {
-            title: { text: 'Jumlah Transaksi' },
+            title: { text: 'Volume (liter)' },
             min: 0
         },
         stroke: { curve: 'smooth' },
@@ -160,7 +160,7 @@
             shared: true,
             intersect: false,
             y: {
-                formatter: function(val) { return val + " transaksi"; }
+                formatter: function(val) { return val + " liter"; }
             }
         }
     };
