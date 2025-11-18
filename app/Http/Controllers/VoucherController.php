@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Station;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,8 @@ class VoucherController extends Controller
      */
     public function create()
     {
-        //
+        $stations = Station::all();
+        return view('vouchers.create', compact('stations'));
     }
 
     /**
@@ -30,7 +32,29 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd('here');
+        $data = $request->validate([
+            'unit_name' => 'required|string|max:255',
+            'station_id' => 'nullable|exists:stations,id',
+            'flowmeter_start' => 'nullable|integer',
+            'flowmeter_end' => 'nullable|integer',
+            'volume' => 'required|integer',
+            'hour_meter' => 'nullable|numeric',
+            'transaction_date' => 'nullable|date',
+            'transaction_time' => 'nullable',
+            'driver_name' => 'nullable|string|max:255',
+            'fuelman' => 'nullable|string|max:255',
+            'remarks' => 'nullable|string|max:255',
+        ]);
+
+        // dd($data);
+
+        $data['user_id'] = auth()->id();
+        $data['status'] = 'pending';
+
+        Voucher::create($data);
+
+        return redirect()->route('vouchers.index')->with('success', 'Voucher created successfully.');
     }
 
     /**

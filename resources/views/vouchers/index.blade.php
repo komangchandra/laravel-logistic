@@ -40,26 +40,33 @@
         <div class="row">
             <!--begin::Col-->
             <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
-
                 @if (session('success'))
-                    <div class="callout callout-info mb-4" role="aler">
-                        {{ session('success') }}
-                    </div>
+                <div class="callout callout-info mb-4" role="aler">
+                    {{ session("success") }}
+                </div>
                 @endif
- 
+
                 <!--begin::Small Box Widget 1-->
                 <div class="card shad ow mb-4">
                     <div class="card-header py-3 d-flex align-items-center">
                         <h6 class="m-0 fw-bold text-primary">Tabel Voucher</h6>
                         <div class="ms-auto">
-                            <a href="{{ route('stations.create') }}" class="btn btn-sm btn-primary">
+                            <a
+                                href="{{ route('vouchers.create') }}"
+                                class="btn btn-sm btn-primary"
+                            >
                                 <i class="bi bi-plus-lg"></i> Create Voucher
                             </a>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table
+                                class="table table-bordered"
+                                id="dataTable"
+                                width="100%"
+                                cellspacing="0"
+                            >
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -86,34 +93,85 @@
                                 </tfoot>
                                 <tbody>
                                     @forelse ($vouchers as $voucher)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $voucher->unit_name }}</td>
-                                            <td>{{ $voucher->station_id->station_name }}</td>
-                                            <td>{{ $voucher->volume }}</td>
-                                            <td>{{ $voucher->user_id->name }}</td>
-                                            <td>{{ $voucher->user_id->remarks }}</td>
-                                            <td>{{ $voucher->user_id->status }}</td>
-                                            <td>
-                                                <a href="{{ route('vouchers.edit', $voucher->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                <form action="{{ route('vouchers.destroy', $voucher->id) }}" method="POST" class="d-inline delete-form">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button" class="btn btn-sm btn-danger btn-delete" data-id="{{ $voucher->id }}">
-                                                        Hapus
-                                                    </button>
-                                                </form>
-
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $voucher->unit_name }}</td>
+                                        <td>
+                                            @if($voucher->station)
+                                            <span
+                                                class="badge bg-primary"
+                                                >{{ $voucher->station->station_name }}</span
+                                            >
+                                            @else
+                                            <span class="badge bg-secondary"
+                                                >Belum Mengisi</span
+                                            >
+                                            @endif
+                                        </td>
+                                        <td>{{ $voucher->volume }}</td>
+                                        <td>
+                                            {{ $voucher->user ? $voucher->user->name : '-' }}
+                                        </td>
+                                        <td>
+                                            {{ $voucher->remarks ?? 'Belum Mengisi' }}
+                                        </td>
+                                        <td>
+                                            @if($voucher->status === 'pending')
+                                            <span
+                                                class="badge bg-warning text-dark"
+                                                >{{ ucfirst($voucher->status) }}</span
+                                            >
+                                            @elseif($voucher->status ===
+                                            'scanned')
+                                            <span
+                                                class="badge bg-success"
+                                                >{{ ucfirst($voucher->status) }}</span
+                                            >
+                                            @else
+                                            <span
+                                                class="badge bg-secondary"
+                                                >{{ ucfirst($voucher->status) }}</span
+                                            >
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @role('Super Admin')
+                                            <a
+                                                href="{{ route('vouchers.edit', $voucher->id) }}"
+                                                class="btn btn-sm btn-warning"
+                                                >Edit</a
+                                            >
+                                            @endrole
+                                            <a
+                                                href="{{ route('vouchers.edit', $voucher->id) }}"
+                                                class="btn btn-sm btn-warning"
+                                                >Print</a
+                                            >
+                                            <form
+                                                action="{{ route('vouchers.destroy', $voucher->id) }}"
+                                                method="POST"
+                                                class="d-inline delete-form"
+                                            >
+                                                @csrf @method('DELETE')
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-sm btn-danger btn-delete"
+                                                    data-id="{{ $voucher->id }}"
+                                                >
+                                                    Hapus
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                     @empty
-                                        <tr>
-                                            <td colspan="5" class="text-center">Belum ada voucher</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="8" class="text-center">
+                                            Belum ada voucher
+                                        </td>
+                                    </tr>
                                     @endforelse
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>
@@ -154,25 +212,25 @@
         });
 
         // SweetAlert konfirmasi delete
-        $('.btn-delete').on('click', function (e) {
+        $(".btn-delete").on("click", function (e) {
             e.preventDefault();
-            let form = $(this).closest('form');
+            let form = $(this).closest("form");
 
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'Cancel'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                form.submit(); 
-            }
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
         });
-    });
     });
 </script>
 @endpush
