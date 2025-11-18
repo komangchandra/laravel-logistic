@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Station;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VoucherController extends Controller
 {
@@ -49,7 +50,7 @@ class VoucherController extends Controller
 
         // dd($data);
 
-        $data['user_id'] = auth()->id();
+        $data['user_id'] = Auth::id();
         $data['status'] = 'pending';
 
         Voucher::create($data);
