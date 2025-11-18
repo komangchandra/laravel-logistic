@@ -30,3 +30,23 @@ content-type: application/json
   "fuelman": "Budi",
   "remarks": "Coal Getting"
 }
+
+###
+
+GET http://localhost:8000/api/vouchers/019a9477-bca0-729d-8033-6e9692419741 HTTP/1.1
+
+###
+PATCH http://localhost:8000/api/vouchers/019a9477-bca0-729d-8033-6e9692419741 HTTP/1.1
+content-type: application/json
+
+{
+  "station_id": 1,
+  "flowmeter_start": 5500,
+  "hour_meter": 12.5,
+  "transaction_date": "2025-01-18",
+  "transaction_time": "08:30",
+  "driver_name": "Asep",
+  "fuelman": "Budi Speed",
+  "remarks": "Isi pagi"
+}
+
