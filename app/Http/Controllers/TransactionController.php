@@ -16,6 +16,7 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::with('unit', 'station')->latest()->get();
+
         return view('transactions.index', compact('transactions'));
     }
 
@@ -26,6 +27,7 @@ class TransactionController extends Controller
     {
         $units = Unit::all();
         $stations = Station::all();
+
         return view('transactions.create', compact('units', 'stations'));
     }
 
@@ -73,6 +75,7 @@ class TransactionController extends Controller
     {
         $units = Unit::all();
         $stations = Station::all();
+
         return view('transactions.edit', compact('transaction', 'units', 'stations'));
     }
 
@@ -106,7 +109,7 @@ class TransactionController extends Controller
         $transaction->update($validatedData);
 
         return redirect()->route('transactions.index')
-                        ->with('success', 'Transaction updated successfully.');
+            ->with('success', 'Transaction updated successfully.');
     }
 
     /**
@@ -115,6 +118,7 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         $transaction->delete();
+
         return redirect()->route('transactions.index')->with('success', 'Transaction deleted successfully.');
     }
 }

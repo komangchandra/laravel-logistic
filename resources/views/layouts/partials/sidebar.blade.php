@@ -151,17 +151,15 @@
                                 <p>Transaction</p>
                             </a>
                         </li>
-                        @role('Super Admin|Direktur')
                         <li class="nav-item">
                             <a
-                                href="./docs/components/main-sidebar.html"
+                                href="{{ route('reports.index') }}"
                                 class="nav-link"
                             >
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Report</p>
                             </a>
                         </li>
-                        @endrole
                     </ul>
                 </li>
                 <!-- End Solar -->

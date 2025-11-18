@@ -15,6 +15,7 @@ class VoucherController extends Controller
     public function index()
     {
         $vouchers = Voucher::with('user')->get();
+
         // dd($vouchers);
         return view('vouchers.index', compact('vouchers'));
     }
@@ -25,6 +26,7 @@ class VoucherController extends Controller
     public function create()
     {
         $stations = Station::all();
+
         return view('vouchers.create', compact('stations'));
     }
 
@@ -88,13 +90,14 @@ class VoucherController extends Controller
     public function destroy(Voucher $voucher)
     {
         $voucher->delete();
+
         return redirect()->route('vouchers.index')->with('success', 'Voucher deleted successfully.');
     }
 
     public function thermal($id)
     {
         $voucher = Voucher::findOrFail($id);
+
         return view('vouchers.thermal', compact('voucher'));
     }
-
 }

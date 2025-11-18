@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Voucher extends Model
 {
     use HasUuids;
-    
+
     protected $guarded = [];
 
     public function user()

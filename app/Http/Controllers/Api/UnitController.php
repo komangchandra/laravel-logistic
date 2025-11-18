@@ -14,6 +14,7 @@ class UnitController extends Controller
     public function index()
     {
         $units = Unit::all();
+
         return response()->json($units);
     }
 
@@ -32,9 +33,9 @@ class UnitController extends Controller
     {
         $unit = Unit::where('unit_id', $unit_id)->first();
 
-        if (!$unit) {
+        if (! $unit) {
             return response()->json([
-                'message' => 'Unit not found'
+                'message' => 'Unit not found',
             ], 404);
         }
 

@@ -18,6 +18,7 @@ class TransactionController extends Controller
             ->whereDate('transaction_date', Carbon::today())
             ->latest()
             ->get();
+
         return response()->json($transactions);
     }
 
@@ -52,7 +53,7 @@ class TransactionController extends Controller
         // 🔁 Kembalikan response JSON
         return response()->json([
             'message' => 'Transaction created successfully',
-            'data' => $transaction
+            'data' => $transaction,
         ], 201);
     }
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UnitController;
@@ -59,7 +60,7 @@ Route::controller(TransactionController::class)->group(function () {
 });
 
 // Voucher Management Router
-Route::controller(VoucherController::class)->group(function(){
+Route::controller(VoucherController::class)->group(function () {
     Route::get('/dashboard/vouchers', 'index')->name('vouchers.index')->middleware('auth');
     Route::get('/dashboard/vouchers/create', 'create')->name('vouchers.create')->middleware('auth');
     Route::post('/dashboard/vouchers/store', 'store')->name('vouchers.store')->middleware('auth');
@@ -67,6 +68,11 @@ Route::controller(VoucherController::class)->group(function(){
     Route::patch('/dashboard/vouchers/{voucher}/update', 'update')->name('vouchers.update')->middleware('auth');
     Route::delete('/dashboard/vouchers/{voucher}/destroy', 'destroy')->name('vouchers.destroy')->middleware('auth');
     Route::get('/vouchers/{id}/print', [VoucherController::class, 'thermal'])->name('vouchers.thermal');
+});
+
+// Report Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/reports', [ReportController::class, 'index'])->name('reports.index');
 });
 
 require __DIR__.'/auth.php';

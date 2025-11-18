@@ -7,10 +7,12 @@ use Illuminate\Support\Str;
 
 class Transaction extends Model
 {
-    protected $keyType = 'string'; 
+    protected $keyType = 'string';
+
     public $incrementing = false;
 
     protected $guarded = [];
+
     protected $with = ['unit', 'station'];
 
     public function unit()
@@ -27,6 +29,7 @@ class Transaction extends Model
     public function getShiftAttribute()
     {
         $hour = \Carbon\Carbon::parse($this->transaction_time)->format('H');
+
         return ($hour >= 6 && $hour < 18) ? 'Shift Siang' : 'Shift Malam';
     }
 
@@ -41,7 +44,6 @@ class Transaction extends Model
     {
         return \Carbon\Carbon::parse($this->transaction_time)->format('H:i');
     }
-
 
     // ✅ Boot method untuk generate UUID
     protected static function boot()

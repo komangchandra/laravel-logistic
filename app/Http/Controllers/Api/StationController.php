@@ -14,6 +14,7 @@ class StationController extends Controller
     public function index()
     {
         $stations = Station::all();
+
         return response()->json($stations);
     }
 
@@ -32,9 +33,9 @@ class StationController extends Controller
     {
         $station = Station::find($id);
 
-        if (!$station) {
+        if (! $station) {
             return response()->json([
-                'message' => 'Station not found'
+                'message' => 'Station not found',
             ], 404);
         }
 
@@ -50,9 +51,9 @@ class StationController extends Controller
         $station = Station::find($id);
 
         // Jika tidak ditemukan, kirim respons error
-        if (!$station) {
+        if (! $station) {
             return response()->json([
-                'message' => 'Station not found'
+                'message' => 'Station not found',
             ], 404);
         }
 
@@ -68,7 +69,7 @@ class StationController extends Controller
         // Kembalikan respons sukses
         return response()->json([
             'message' => 'Station updated successfully',
-            'data' => $station
+            'data' => $station,
         ]);
     }
 

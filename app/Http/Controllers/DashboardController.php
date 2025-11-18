@@ -21,12 +21,12 @@ class DashboardController extends Controller
 
         // Ambil total volume per hari dan per remark
         $transactions = Transaction::select(
-                DB::raw('DAY(transaction_date) as day'),
-                DB::raw("CASE 
+            DB::raw('DAY(transaction_date) as day'),
+            DB::raw("CASE 
                             WHEN remarks IN ('Coal Getting','Coal Hauling','CCP','OB Removal') 
                             THEN remarks ELSE 'Lainnya' END as remark"),
-                DB::raw('SUM(volume) as total_volume')  // <-- hitung total volume
-            )
+            DB::raw('SUM(volume) as total_volume')  // <-- hitung total volume
+        )
             ->whereYear('transaction_date', $year)
             ->whereMonth('transaction_date', $month)
             ->groupBy('day', 'remark')
@@ -40,7 +40,7 @@ class DashboardController extends Controller
         foreach ($allRemarks as $remark) {
             $series = [];
             foreach ($labels as $day) {
-                $match = $transactions->firstWhere(function($item) use ($day, $remark) {
+                $match = $transactions->firstWhere(function ($item) use ($day, $remark) {
                     return $item->day == $day && $item->remark == $remark;
                 });
                 $series[] = $match ? $match->total_volume : 0; // <-- gunakan total_volume

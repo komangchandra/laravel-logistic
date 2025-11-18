@@ -13,6 +13,7 @@ class StationController extends Controller
     public function index()
     {
         $stations = Station::all();
+
         return view('stations.index', compact('stations'));
     }
 
@@ -39,7 +40,7 @@ class StationController extends Controller
             'sounding' => $request->sounding,
         ]);
 
-        return redirect()->route('stations.index')->with('success', 'Station created successfully.');   
+        return redirect()->route('stations.index')->with('success', 'Station created successfully.');
     }
 
     /**
@@ -72,6 +73,7 @@ class StationController extends Controller
     public function destroy(Station $station)
     {
         $station->delete();
-        return redirect()->route('stations.index')->with('success', 'Station deleted successfully.');   
+
+        return redirect()->route('stations.index')->with('success', 'Station deleted successfully.');
     }
 }

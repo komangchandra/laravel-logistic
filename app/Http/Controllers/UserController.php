@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-// use App\Http\Controllers\Controller;
 use App\Models\User;
-
+// use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
     public function index()
     {
         $users = User::with('roles')->get(); // ambil semua user beserta rolenya
+
         return view('users.index', compact('users'));
     }
 

@@ -30,11 +30,12 @@ class VoucherController extends Controller
     public function show(string $id)
     {
         $voucher = Voucher::find($id);
-        if (!$voucher) {
+        if (! $voucher) {
             return response()->json([
-                'message' => 'Voucher not found'
+                'message' => 'Voucher not found',
             ], 404);
         }
+
         return response()->json($voucher);
     }
 
@@ -48,28 +49,28 @@ class VoucherController extends Controller
 
         $voucher = Voucher::find($id);
 
-        if (!$voucher) {
+        if (! $voucher) {
             return response()->json([
-                'message' => 'Voucher not found'
+                'message' => 'Voucher not found',
             ], 404);
         }
 
         // ⛔ CEK STATUS — Jika sudah SCANNED, tolak update
         if ($voucher->status === 'scanned') {
             return response()->json([
-                'message' => 'Voucher sudah pernah discan sebelumnya'
+                'message' => 'Voucher sudah pernah discan sebelumnya',
             ], 403);
         }
 
         $data = $request->validate([
-            'station_id'        => 'required|exists:stations,id',
-            'flowmeter_start'   => 'required|integer',
-            'hour_meter'        => 'required|numeric',
-            'transaction_date'  => 'required|date',
-            'transaction_time'  => 'required',
-            'driver_name'       => 'required|string|max:255',
-            'fuelman'           => 'required|string|max:255',
-            'remarks'           => 'required|string|max:255',
+            'station_id' => 'required|exists:stations,id',
+            'flowmeter_start' => 'required|integer',
+            'hour_meter' => 'required|numeric',
+            'transaction_date' => 'required|date',
+            'transaction_time' => 'required',
+            'driver_name' => 'required|string|max:255',
+            'fuelman' => 'required|string|max:255',
+            'remarks' => 'required|string|max:255',
         ]);
 
         $data['flowmeter_end'] = $data['flowmeter_start'] + $voucher->volume;
@@ -79,11 +80,9 @@ class VoucherController extends Controller
 
         return response()->json([
             'message' => 'Voucher updated successfully',
-            'data' => $voucher
+            'data' => $voucher,
         ], 200);
     }
-
-
 
     /**
      * Remove the specified resource from storage.

@@ -13,6 +13,7 @@ class UnitController extends Controller
     public function index()
     {
         $units = Unit::all();
+
         // dd($units);
         return view('units.index', compact('units'));
     }
@@ -32,26 +33,26 @@ class UnitController extends Controller
     {
         try {
             $request->validate([
-            'unit_id' => 'required|unique:units,unit_id',
-            'nomor_lambung' => 'required',
-            'unit_name' => 'required',
-            'status' => 'required',
-            'area' => 'required',
-        ]);
+                'unit_id' => 'required|unique:units,unit_id',
+                'nomor_lambung' => 'required',
+                'unit_name' => 'required',
+                'status' => 'required',
+                'area' => 'required',
+            ]);
 
-        Unit::create([
-            'unit_id' => $request->unit_id,
-            'nomor_lambung' => $request->nomor_lambung,
-            'unit_name' => $request->unit_name,
-            'status' => $request->status,
-            'area' => $request->area,
-        ]);
+            Unit::create([
+                'unit_id' => $request->unit_id,
+                'nomor_lambung' => $request->nomor_lambung,
+                'unit_name' => $request->unit_name,
+                'status' => $request->status,
+                'area' => $request->area,
+            ]);
 
-        return redirect()->route('units.index')->with('success', 'Unit created successfully.');
+            return redirect()->route('units.index')->with('success', 'Unit created successfully.');
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withInput()->with('error', 'ID Kartu sudah terdaftar atau input tidak valid.');
         }
-        
+
     }
 
     /**
@@ -77,26 +78,26 @@ class UnitController extends Controller
     {
         try {
             $request->validate([
-            'unit_id' => 'required|unique:units,unit_id,'.$unit->id,
-            'nomor_lambung' => 'required',
-            'unit_name' => 'required',
-            'status' => 'required',
-            'area' => 'required',
-        ]);
+                'unit_id' => 'required|unique:units,unit_id,'.$unit->id,
+                'nomor_lambung' => 'required',
+                'unit_name' => 'required',
+                'status' => 'required',
+                'area' => 'required',
+            ]);
 
-        $unit->update([
-            'unit_id' => $request->unit_id,
-            'nomor_lambung' => $request->nomor_lambung,
-            'unit_name' => $request->unit_name,
-            'status' => $request->status,
-            'area' => $request->area,
-        ]);
+            $unit->update([
+                'unit_id' => $request->unit_id,
+                'nomor_lambung' => $request->nomor_lambung,
+                'unit_name' => $request->unit_name,
+                'status' => $request->status,
+                'area' => $request->area,
+            ]);
 
-        return redirect()->route('units.index')->with('success', 'Unit updated successfully.');
+            return redirect()->route('units.index')->with('success', 'Unit updated successfully.');
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withInput()->with('error', 'ID Kartu sudah terdaftar atau input tidak valid.');
         }
-        
+
     }
 
     /**
@@ -105,6 +106,7 @@ class UnitController extends Controller
     public function destroy(Unit $unit)
     {
         $unit->delete();
+
         return redirect()->route('units.index')->with('success', 'Unit deleted successfully.');
     }
 }
