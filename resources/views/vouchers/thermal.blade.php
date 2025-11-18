@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Print Thermal</title>
+    <title>{{ $voucher->unit_name }}</title>
 
     <style>
         body {

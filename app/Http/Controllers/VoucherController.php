@@ -87,7 +87,8 @@ class VoucherController extends Controller
      */
     public function destroy(Voucher $voucher)
     {
-        //
+        $voucher->delete();
+        return redirect()->route('vouchers.index')->with('success', 'Voucher deleted successfully.');
     }
 
     public function thermal($id)
