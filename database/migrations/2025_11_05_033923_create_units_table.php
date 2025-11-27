@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('unit_name');
             $table->string('status');
             $table->string('area');
+            $table->string('activity');
             $table->timestamps();
         });
     }

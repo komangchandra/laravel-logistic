@@ -13,14 +13,14 @@ class UnitSeeder extends Seeder
     public function run(): void
     {
         $units = [
-            ['38194527', 'RD6101', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya'],
-            ['60281394', 'RD6102', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya'],
-            ['91570268', 'RD6103', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya'],
-            ['47328905', 'RD6104', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya'],
-            ['12067439', 'RD6105', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya'],
-            ['85492176', 'RD6106', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya'],
-            ['29645013', 'RD6107', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya'],
-            ['73809641', 'RD6108', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya'],
+            ['38194527', 'RD6101', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya', 'OB Removal'],
+            ['60281394', 'RD6102', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya', 'OB Removal'],
+            ['91570268', 'RD6103', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya', 'OB Removal'],
+            ['47328905', 'RD6104', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya', 'OB Removal'],
+            ['12067439', 'RD6105', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya', 'OB Removal'],
+            ['85492176', 'RD6106', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya', 'OB Removal'],
+            ['29645013', 'RD6107', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya', 'OB Removal'],
+            ['73809641', 'RD6108', 'Dump Truck Wide Body XCMG', 'GPU Rental KMP', 'Pit Agriya', 'OB Removal'],
         ];
 
         foreach ($units as $unit) {
@@ -30,6 +30,7 @@ class UnitSeeder extends Seeder
                 'unit_name' => $unit[2],
                 'status' => $unit[3],
                 'area' => $unit[4],
+                'activity' => $unit[4],
             ]);
         }
     }

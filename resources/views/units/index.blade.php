@@ -46,9 +46,6 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                
-
-                
 
                 <!--begin::Small Box Widget 1-->
                 <div class="card shad ow mb-4">
@@ -71,6 +68,7 @@
                                         <th>Nama</th>
                                         <th>Owner</th>
                                         <th>Area</th>
+                                        <th>Aktivitas</th>
                                         <th>##</th>
                                     </tr>
                                 </thead>
@@ -82,6 +80,7 @@
                                         <th>Nama</th>
                                         <th>Owner</th>
                                         <th>Area</th>
+                                        <th>Aktivitas</th>
                                         <th>##</th>
                                     </tr>
                                 </tfoot>
@@ -94,18 +93,14 @@
                                             <td>{{ $unit->unit_name }}</td>
                                             <td>{{ $unit->status }}</td>
                                             <td>{{ $unit->area }}</td>
+                                            <td>{{ $unit->activity }}</td>
                                             <td>
-                                                <a href="{{ route('units.edit', $unit->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                <!-- <form action="{{ route('units.destroy', $unit->id) }}" method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                                </form> -->
+                                                <a href="{{ route('units.edit', $unit->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
                                                 <form action="{{ route('units.destroy', $unit->id) }}" method="POST" class="d-inline delete-form">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="button" class="btn btn-sm btn-danger btn-delete" data-id="{{ $unit->id }}">
-                                                        Hapus
+                                                        <i class="bi bi-trash3-fill"></i>
                                                     </button>
                                                 </form>
 
@@ -113,7 +108,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center">Belum ada user</td>
+                                            <td colspan="5" class="text-center">Belum ada Unit</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
