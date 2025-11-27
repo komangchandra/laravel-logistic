@@ -90,6 +90,27 @@
                             <input type="text" class="form-control" id="area" name="area" required/>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="activity" class="col-sm-5 col-form-label">Activity</label>
+                            <div class="col-sm-7">
+                            <select class="form-select" id="activity" name="activity" required>
+                                <option selected disabled value="">Pilih Aktivitas Unit</option>
+                                @foreach($activities as $activity)
+                                    <option value="{{ $activity }}">{{ $activity }}</option>
+                                @endforeach
+                            </select>
+                            </div>
+                        </div>
+                        <!-- <div class="row mb-3">
+                            <label for="is_activ" class="col-sm-5 col-form-label">Status</label>
+                            <div class="col-sm-7">
+                            <select class="form-select" id="is_activ" name="is_activ" required>
+                                <option selected disabled value="">Pilih Status Unit</option>
+                                    <option value=true >Aktif</option>
+                                    <option value=false >Suspend</option>
+                            </select>
+                            </div>
+                        </div> -->
                     </div>
                     <!--end::Body-->
                     <!--begin::Footer-->

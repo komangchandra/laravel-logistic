@@ -91,6 +91,43 @@
                             <input type="text" class="form-control" id="area" name="area" value="{{ old('area', $unit->area) }}" required/>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="activity" class="col-sm-5 col-form-label">Activity</label>
+                            <div class="col-sm-7">
+                                <select class="form-select" id="activity" name="activity" required>
+                                    <option selected disabled value="">Pilih Aktivitas Unit</option>
+                                    
+                                    @foreach($activities as $activity)
+                                        <option value="{{ $activity }}" 
+                                            {{-- Lakukan Pengecekan di Sini --}}
+                                            @if (old('activity', $unit->activity) == $activity)
+                                                selected
+                                            @endif
+                                        >
+                                            {{ $activity }}
+                                        </option>
+                                    @endforeach
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="is_activ" class="col-sm-5 col-form-label">Status</label>
+                            <div class="col-sm-7">
+                                <select class="form-select" id="is_activ" name="is_activ" required>
+                                    <option selected disabled value="">Pilih Status Unit</option>
+                                    
+                                    {{-- Menggunakan variabel untuk membandingkan --}}
+                                    @php
+                                        $currentStatus = old('is_activ', $unit->is_activ);
+                                    @endphp
+
+                                    <option value="1" @if ($currentStatus == 1) selected @endif>Aktif</option>
+                                    <option value="0" @if ($currentStatus == 0) selected @endif>Suspend</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <!--end::Body-->
                     <!--begin::Footer-->

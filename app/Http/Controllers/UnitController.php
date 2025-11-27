@@ -23,7 +23,16 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return view('units.create');
+        $activities = [
+            "Coal Getting",
+            "Coal Hauling",
+            "CCP",
+            "OB Removal",
+            "Maintenance Road",
+            "Office & Mess",
+            "Lainnya",
+        ];
+        return view('units.create', compact('activities'));
     }
 
     /**
@@ -38,6 +47,7 @@ class UnitController extends Controller
                 'unit_name' => 'required',
                 'status' => 'required',
                 'area' => 'required',
+                'activity' => 'required',
             ]);
 
             Unit::create([
@@ -46,6 +56,7 @@ class UnitController extends Controller
                 'unit_name' => $request->unit_name,
                 'status' => $request->status,
                 'area' => $request->area,
+                'activity' => $request->activity,
             ]);
 
             return redirect()->route('units.index')->with('success', 'Unit created successfully.');
@@ -68,7 +79,18 @@ class UnitController extends Controller
      */
     public function edit(Unit $unit)
     {
-        return view('units.edit', compact('unit'));
+        $activities = 
+        [
+            "Coal Getting",
+            "Coal Hauling",
+            "CCP",
+            "OB Removal",
+            "Maintenance Road",
+            "Office & Mess",
+            "Lainnya",
+        ];
+
+        return view('units.edit', compact('unit', 'activities'));
     }
 
     /**
@@ -83,6 +105,8 @@ class UnitController extends Controller
                 'unit_name' => 'required',
                 'status' => 'required',
                 'area' => 'required',
+                'activity' => 'required',
+                'is_activ' => 'required'
             ]);
 
             $unit->update([
@@ -91,11 +115,13 @@ class UnitController extends Controller
                 'unit_name' => $request->unit_name,
                 'status' => $request->status,
                 'area' => $request->area,
+                'activity' => $request->activity,
+                'is_activ' => $request->is_activ,
             ]);
 
             return redirect()->route('units.index')->with('success', 'Unit updated successfully.');
         } catch (\Illuminate\Validation\ValidationException $e) {
-            return redirect()->back()->withInput()->with('error', 'ID Kartu sudah terdaftar atau input tidak valid.');
+            return redirect()->back()->withInput()->with('error', 'Gagal menyimpan | Terdapat kesalahan data!.');
         }
 
     }
