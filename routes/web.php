@@ -60,15 +60,23 @@ Route::controller(TransactionController::class)->group(function () {
 });
 
 // Voucher Management Router
-Route::controller(VoucherController::class)->group(function () {
-    Route::get('/dashboard/vouchers', 'index')->name('vouchers.index')->middleware('auth');
-    Route::get('/dashboard/vouchers/create', 'create')->name('vouchers.create')->middleware('auth');
-    Route::post('/dashboard/vouchers/store', 'store')->name('vouchers.store')->middleware('auth');
-    Route::get('/dashboard/vouchers/{voucher}/edit', 'edit')->name('vouchers.edit')->middleware('auth');
-    Route::patch('/dashboard/vouchers/{voucher}/update', 'update')->name('vouchers.update')->middleware('auth');
-    Route::delete('/dashboard/vouchers/{voucher}/destroy', 'destroy')->name('vouchers.destroy')->middleware('auth');
-    Route::get('/vouchers/{id}/print', [VoucherController::class, 'thermal'])->name('vouchers.thermal');
-});
+Route::controller(VoucherController::class)
+    ->middleware(['auth', 'role:Super-Admin|Admin'])
+    ->prefix('/dashboard/vouchers')
+    ->name('vouchers.')
+    ->group(function () {
+
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{voucher}/edit', 'edit')->name('edit');
+        Route::patch('/{voucher}/update', 'update')->name('update');
+        Route::delete('/{voucher}/destroy', 'destroy')->name('destroy');
+
+        // Thermal print
+        Route::get('/print/{id}', 'thermal')->name('thermal');
+    });
+
 
 // Report Routes
 Route::middleware(['auth'])->group(function () {

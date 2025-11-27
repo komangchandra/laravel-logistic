@@ -133,6 +133,7 @@
                                 <p>Station</p>
                             </a>
                         </li>
+                        @role(['Super-Admin', 'Admin'])
                         <li class="nav-item">
                             <a
                                 href="{{ route('vouchers.index') }}"
@@ -142,6 +143,7 @@
                                 <p>Voucher</p>
                             </a>
                         </li>
+                        @endrole
                         <li class="nav-item">
                             <a
                                 href="{{ route('transactions.index') }}"
@@ -164,7 +166,7 @@
                 </li>
                 <!-- End Solar -->
 
-                @role('Super Admin')
+                @role('Super-Admin')
                 <li class="nav-header">USER MANAGEMENT</li>
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link">

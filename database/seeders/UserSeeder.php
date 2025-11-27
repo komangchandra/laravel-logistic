@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'email' => 'komangchandraaa1@gmail.com',
             'password' => Hash::make('Empire8855!'),
         ]);
-        $komang->assignRole('Super Admin');
+        $komang->assignRole('Super-Admin');
 
         // Wayan Sujasman - Direktur
         $wayan = User::create([
@@ -75,7 +75,7 @@ class UserSeeder extends Seeder
             'email' => 'admin.engineering@gorbyputrautama.com',
             'password' => Hash::make('@Kemang43'),
         ]);
-        $admineng->assignRole('User');
+        $admineng->assignRole('Admin');
 
         // Logistic - Eng
         $logistik = User::create([
