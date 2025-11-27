@@ -33,12 +33,18 @@ Route::resource('/dashboard/users', UserController::class)->middleware(['auth', 
 // Unit Management Routes
 Route::controller(UnitController::class)->group(function () {
     Route::get('/dashboard/units', 'index')->name('units.index')->middleware('auth');
-    Route::get('/dashboard/units/{unit}/edit', 'edit')->name('units.edit')->middleware('auth');
-    Route::patch('/dashboard/units/{unit}/update', 'update')->name('units.update')->middleware('auth');
-    Route::get('/dashboard/units/create', 'create')->name('units.create')->middleware('auth');
-    Route::post('/dashboard/units/store', 'store')->name('units.store')->middleware('auth');
-    Route::delete('/dashboard/units/{unit}/destroy', 'destroy')->name('units.destroy')->middleware('auth');
 });
+Route::controller(UnitController::class)
+    ->middleware(['auth', 'role:Super-Admin|Admin'])
+    ->prefix('/dashboard/units')
+    ->name('units.')
+    ->group(function () {
+        Route::get('/{unit}/edit', 'edit')->name('edit')->middleware('auth');
+        Route::patch('/{unit}/update', 'update')->name('update')->middleware('auth');
+        Route::get('/create', 'create')->name('create')->middleware('auth');
+        Route::post('/store', 'store')->name('store')->middleware('auth');
+        Route::delete('/{unit}/destroy', 'destroy')->name('destroy')->middleware('auth');
+    });
 
 // Station Management Routes
 Route::controller(StationController::class)->group(function () {

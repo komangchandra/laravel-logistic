@@ -2,7 +2,7 @@
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
-        <a href="./index.html" class="brand-link">
+        <a href="{{ route('dashboard') }}" class="brand-link">
             <!--begin::Brand Image-->
             <img
                 src="{{ asset('/') }}dist-lte/assets/img/AdminLTELogo.png"
@@ -185,24 +185,6 @@
                             </a>
                         </li>
                         @endrole
-                        <!-- <li class="nav-item">
-                            <a
-                                href="{{ route('transactions.index') }}"
-                                class="nav-link {{ Request::is('dashboard/transactions*') ? 'active' : '' }}"
-                            >
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>All Transaction</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a
-                                href="{{ route('transactions.index') }}"
-                                class="nav-link {{ Request::is('dashboard/transactions*') ? 'active' : '' }}"
-                            >
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>MTD Transaction</p>
-                            </a>
-                        </li> -->
                         @role('Super-Admin')
                         <li class="nav-item">
                             <a

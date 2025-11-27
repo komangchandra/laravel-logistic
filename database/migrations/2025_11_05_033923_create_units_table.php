@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('area');
             $table->string('activity');
+            $table->boolean('is_activ')->default(true);;
             $table->timestamps();
         });
     }

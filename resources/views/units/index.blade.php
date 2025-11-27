@@ -52,7 +52,16 @@
                     <div class="card-header py-3 d-flex align-items-center">
                         <h6 class="m-0 fw-bold text-primary">Tabel Unit</h6>
                         <div class="ms-auto">
-                            <a href="{{ route('units.create') }}" class="btn btn-sm btn-primary">
+
+                            @php
+                                $disabledRoles = ['Direktur', 'Manager', 'Logistic', 'User'];
+                                $isDisabled = auth()->user() && auth()->user()->hasAnyRole($disabledRoles);
+                            @endphp
+
+                            <a 
+                                href="{{ $isDisabled ? '#' : route('units.create') }}" 
+                                class="btn btn-sm btn-primary {{ $isDisabled ? 'disabled' : '' }}"
+                                {{ $isDisabled ? 'aria-disabled=true tabindex=-1' : '' }}>
                                 <i class="bi bi-plus-lg"></i> Create Data Unit
                             </a>
                         </div>
@@ -88,7 +97,11 @@
                                     @forelse ($units as $unit)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $unit->unit_id }}</td>
+                                            @if ($unit->is_activ == 1)
+                                                <td class="bg-primary text-white">{{ $unit->unit_id }}</td>
+                                            @else
+                                                <td class="bg-danger text-white">{{ $unit->unit_id }}</td>
+                                            @endif
                                             <td>{{ $unit->nomor_lambung }}</td>
                                             <td>{{ $unit->unit_name }}</td>
                                             <td>{{ $unit->status }}</td>
@@ -96,6 +109,7 @@
                                             <td>{{ $unit->activity }}</td>
                                             <td>
                                                 <a href="{{ route('units.edit', $unit->id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                                @role('Super-Admin')
                                                 <form action="{{ route('units.destroy', $unit->id) }}" method="POST" class="d-inline delete-form">
                                                     @csrf
                                                     @method('DELETE')
@@ -103,7 +117,7 @@
                                                         <i class="bi bi-trash3-fill"></i>
                                                     </button>
                                                 </form>
-
+                                                @endrole
                                             </td>
                                         </tr>
                                     @empty
