@@ -37,7 +37,7 @@
                 </li>
                 <li class="nav-header">MENU</li>
 
-                @role('Super Admin|Direktur')
+                @role('Super-Admin|Direktur')
                 <!-- Purchasing -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -71,7 +71,7 @@
                 <!-- End Purchasing -->
                 @endrole
 
-                @role('Super Admin|Direktur')
+                @role('Super-Admin|Direktur')
                 <!-- Gudang -->
                 <li class="nav-item">
                     <a href="#" class="nav-link ">
@@ -105,9 +105,50 @@
                 <!-- End Gudang -->
                  @endrole
 
+                <!-- Transaksi Solar -->
+                <li class="nav-item {{ Request::is('dashboard/transactions*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ Request::is('dashboard/transactions*') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-fuel-pump-fill"></i>
+                        <p>
+                            Transaksi
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a
+                                href="{{ route('transactions.index-wtd') }}"
+                                class="nav-link {{ Request::routeIs('transactions.index-wtd') ? 'active' : '' }}"
+                            >
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Week To Date</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                href="{{ route('transactions.index-mtd') }}"
+                                class="nav-link {{ Request::routeIs('transactions.index-mtd') ? 'active' : '' }}"
+                            >
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>MTD</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                href="{{ route('transactions.index') }}"
+                                class="nav-link {{ Request::routeIs('transactions.index') ? 'active' : '' }}"
+                            >
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>All Transaction</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Transaksi Solar -->
+
                 <!-- Solar -->
-                <li class="nav-item {{ Request::is('dashboard/units*') || Request::is('dashboard/stations*') || Request::is('dashboard/vouchers*') || Request::is('dashboard/transactions*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ Request::is('dashboard/units*') || Request::is('dashboard/stations*') || Request::is('dashboard/vouchers*') || Request::is('dashboard/transactions*') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('dashboard/units*') || Request::is('dashboard/stations*') || Request::is('dashboard/vouchers*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ Request::is('dashboard/units*') || Request::is('dashboard/stations*') || Request::is('dashboard/vouchers*') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-fuel-pump"></i>
                         <p>
                             Solar Management
@@ -144,15 +185,25 @@
                             </a>
                         </li>
                         @endrole
+                        <!-- <li class="nav-item">
+                            <a
+                                href="{{ route('transactions.index') }}"
+                                class="nav-link {{ Request::is('dashboard/transactions*') ? 'active' : '' }}"
+                            >
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>All Transaction</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a
                                 href="{{ route('transactions.index') }}"
                                 class="nav-link {{ Request::is('dashboard/transactions*') ? 'active' : '' }}"
                             >
                                 <i class="nav-icon bi bi-circle"></i>
-                                <p>Transaction</p>
+                                <p>MTD Transaction</p>
                             </a>
-                        </li>
+                        </li> -->
+                        @role('Super-Admin')
                         <li class="nav-item">
                             <a
                                 href="{{ route('reports.index') }}"
@@ -162,6 +213,7 @@
                                 <p>Report</p>
                             </a>
                         </li>
+                        @endrole
                     </ul>
                 </li>
                 <!-- End Solar -->

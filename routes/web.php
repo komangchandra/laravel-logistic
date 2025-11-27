@@ -52,6 +52,8 @@ Route::controller(StationController::class)->group(function () {
 // Transaction Management Routes
 Route::controller(TransactionController::class)->group(function () {
     Route::get('/dashboard/transactions', 'index')->name('transactions.index')->middleware('auth');
+    Route::get('/dashboard/transactions-wtd', 'index')->name('transactions.index-wtd')->middleware('auth');
+    Route::get('/dashboard/transactions-mtd', 'index')->name('transactions.index-mtd')->middleware('auth');
     Route::get('/dashboard/transactions/{transaction}/edit', 'edit')->name('transactions.edit')->middleware('auth');
     Route::patch('/dashboard/transactions/{transaction}/update', 'update')->name('transactions.update')->middleware('auth');
     Route::get('/dashboard/transactions/create', 'create')->name('transactions.create')->middleware('auth');

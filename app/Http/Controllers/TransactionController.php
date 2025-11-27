@@ -121,4 +121,45 @@ class TransactionController extends Controller
 
         return redirect()->route('transactions.index')->with('success', 'Transaction deleted successfully.');
     }
+    
+    /**
+     * Display a listing of the resource.
+     */
+    public function wtd()
+    {
+        $startOfWeek = Carbon::now()->startOfWeek();  // Senin
+        $endOfWeek   = Carbon::now()->endOfWeek();    
+
+        $transactions = Transaction::with('unit', 'station')
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+            ->latest()
+            ->get();
+
+        return view('transactions.index', compact('transactions'));
+    }
+
+
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function mtd()
+    {{
+        $today = Carbon::now();
+
+        // Tanggal 1 bulan ini
+        $startOfMonth = Carbon::create($today->year, $today->month, 1)->startOfDay();
+
+        // Sampai hari ini
+        $endOfMonth = $today->endOfDay();
+
+        // Ambil transaksi dari tgl 1 sampai hari ini
+        $transactions = Transaction::with('unit', 'station')
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->latest()
+            ->get();
+
+        return view('transactions.index', compact('transactions'));
+    }}
+
 }
