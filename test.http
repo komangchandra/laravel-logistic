@@ -15,7 +15,7 @@ content-type: application/json
 
 ###
 
-https://gpu.komangchandra.my.id/laravel-logistic/public/api/transactions HTTP/1.1
+http://localhost:8000/api/transactions HTTP/1.1
 
 content-type: application/json
 

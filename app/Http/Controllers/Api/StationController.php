@@ -60,7 +60,7 @@ class StationController extends Controller
         // Validasi input dari request
         $validatedData = $request->validate([
             'station_name' => 'required|string|max:255',
-            'sounding' => 'required',
+            'flow_meter' => 'required',
         ]);
 
         // Update data station
