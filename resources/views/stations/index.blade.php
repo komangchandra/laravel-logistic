@@ -47,9 +47,6 @@
                     </div>
                 @endif
                 
-
-                
-
                 <!--begin::Small Box Widget 1-->
                 <div class="card shad ow mb-4">
                     <div class="card-header py-3 d-flex align-items-center">
@@ -86,7 +83,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $station->station_name }}</td>
-                                            <td>{{ $station->sounding }}</td>
+                                            <td>{{ $station->flow_meter }}</td>
                                             <td>{{ $station->updated_at }}</td>
                                             <td>
                                                 <a href="{{ route('stations.edit', $station->id) }}" class="btn btn-sm btn-warning">Edit</a>
@@ -97,7 +94,7 @@
                                                         Hapus
                                                     </button>
                                                 </form>
-
+                                                <!-- <a  href="#">Export</a> -->
                                             </td>
                                         </tr>
                                     @empty

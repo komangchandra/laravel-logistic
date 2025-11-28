@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('stations', function (Blueprint $table) {
             $table->id();
             $table->string('station_name');
-            $table->integer('sounding');
+            $table->integer('flow_meter');
             $table->timestamps();
         });
     }
