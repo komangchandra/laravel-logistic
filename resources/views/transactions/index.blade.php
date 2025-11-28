@@ -75,6 +75,7 @@
                                         <th>Flow Akhir</th>
                                         <th>Volume</th>
                                         <th>Remakrk</th>
+                                        <th>Lokasi</th>
                                         <th>##</th>
                                     </tr>
                                 </thead>
@@ -92,6 +93,7 @@
                                         <th>Flow Akhir</th>
                                         <th>Volume</th>
                                         <th>Remakrk</th>
+                                        <th>Lokasi</th>
                                         <th>##</th>
                                     </tr>
                                 </tfoot>
@@ -109,7 +111,8 @@
                                             <td>{{ number_format($transaction->flowmeter_start) }}</td>
                                             <td>{{ number_format($transaction->flowmeter_end) }}</td>
                                             <td>{{ number_format($transaction->volume) }}</td>
-                                            <td>{{ $transaction->remarks ?? '-' }}</td>
+                                            <td>{{ $transaction->unit->activity ?? '-' }}</td>
+                                            <td>{{ $transaction->unit->area ?? '-' }}</td>
                                             <td>
                                                 <a href="{{ route('transactions.edit', $transaction->id) }}" class="btn btn-sm btn-warning">Edit</a>
 

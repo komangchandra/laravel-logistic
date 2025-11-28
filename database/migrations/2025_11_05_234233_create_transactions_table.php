@@ -24,7 +24,6 @@ return new class extends Migration
             $table->time('transaction_time');
             $table->string('driver_name');
             $table->string('fuelman');
-            $table->string('remarks')->nullable();
             $table->timestamps();
         });
     }

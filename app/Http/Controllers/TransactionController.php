@@ -45,7 +45,6 @@ class TransactionController extends Controller
             'hour_meter' => 'required',
             'driver_name' => 'required',
             'fuelman' => 'required',
-            'remarks' => 'required',
         ]);
 
         // 🧮 Hitung nilai otomatis
@@ -92,7 +91,6 @@ class TransactionController extends Controller
             'hour_meter' => 'required',
             'driver_name' => 'required',
             'fuelman' => 'required',
-            'remarks' => 'required',
         ]);
 
         // 🧮 Hitung volume otomatis

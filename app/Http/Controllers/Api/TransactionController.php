@@ -37,7 +37,6 @@ class TransactionController extends Controller
             'hour_meter' => 'required|numeric',
             'driver_name' => 'required|string|max:255',
             'fuelman' => 'required|string|max:255',
-            'remarks' => 'required|string',
         ]);
 
         // 🧮 Hitung volume otomatis

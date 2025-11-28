@@ -131,14 +131,6 @@
                                 required/>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label for="remarks" class="col-sm-5 col-form-label">Remarks</label>
-                            <div class="col-sm-7">
-                            <input type="text" class="form-control" id="remarks" name="remarks"
-                                value="{{ old('remarks', $transaction->remarks) }}"
-                                required/>
-                            </div>
-                        </div>
 
                     </div>
                     <!--end::Body-->
