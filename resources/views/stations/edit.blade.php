@@ -25,7 +25,7 @@
                         <a href="{{ route('stations.index') }}">Menu Station</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        Create Station
+                        Edit Station
                     </li>
                 </ol>
             </div>
@@ -47,30 +47,31 @@
                 <!--begin::Horizontal Form-->
                 <div class="card card-primary card-outline mb-4">
                 <!--begin::Header-->
-                <div class="card-header"><div class="card-title">Station Form</div></div>
+                <div class="card-header"><div class="card-title">Station Form Edit</div></div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                <form action="{{ route('stations.store') }}" method="POST">
+                <form action="{{ route('stations.update', $station->id) }}" method="POST">
+                    @method('PATCH')
                     @csrf
                     <!--begin::Body-->
                     <div class="card-body">
                         <div class="row mb-3">
                             <label for="station_name" class="col-sm-5 col-form-label">Nama Station</label>
                             <div class="col-sm-7">
-                            <input type="text" class="form-control" id="station_name" name="station_name" required/>
+                            <input type="text" class="form-control" id="station_name" name="station_name" value="{{ old('status', $station->station_name) }}"  required/>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="flow_meter" class="col-sm-5 col-form-label">Flow Rate</label>
                             <div class="col-sm-7">
-                            <input type="number" class="form-control" id="flow_meter" name="flow_meter" required/>
+                            <input type="number" class="form-control" id="flow_meter" name="flow_meter" value="{{ old('status', $station->flow_meter) }}"  required/>
                             </div>
                         </div>
                     </div>
                     <!--end::Body-->
                     <!--begin::Footer-->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Save Data Station</button>
+                        <button type="submit" class="btn btn-primary">Update Data Station</button>
                     </div>
                     <!--end::Footer-->
                 </form>

@@ -51,6 +51,7 @@ Route::controller(StationController::class)->group(function () {
     Route::get('/dashboard/stations', 'index')->name('stations.index')->middleware('auth');
     Route::get('/dashboard/stations/{station}/edit', 'edit')->name('stations.edit')->middleware('auth');
     Route::get('/dashboard/stations/create', 'create')->name('stations.create')->middleware('auth');
+    Route::patch('/dashboard/stations/{station}/update', 'update')->name('stations.update')->middleware('auth');
     Route::post('/dashboard/stations/store', 'store')->name('stations.store')->middleware('auth');
     Route::delete('/dashboard/stations/{station}/destroy', 'destroy')->name('stations.destroy')->middleware('auth');
 });

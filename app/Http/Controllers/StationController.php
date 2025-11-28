@@ -32,12 +32,12 @@ class StationController extends Controller
     {
         $request->validate([
             'station_name' => 'required|string|max:255',
-            'sounding' => 'required|string|max:255',
+            'flow_meter' => 'required|string|max:255',
         ]);
 
         Station::create([
             'station_name' => $request->station_name,
-            'sounding' => $request->sounding,
+            'flow_meter' => $request->flow_meter,
         ]);
 
         return redirect()->route('stations.index')->with('success', 'Station created successfully.');
@@ -64,7 +64,17 @@ class StationController extends Controller
      */
     public function update(Request $request, Station $station)
     {
-        //
+        $request->validate([
+            'station_name' => 'required|string|max:255',
+            'flow_meter' => 'required|string|max:255',
+        ]);
+
+        $station->update([
+            'station_name' => $request->station_name,
+            'flow_meter' => $request->flow_meter,
+        ]);
+
+        return redirect()->route('stations.index')->with('success', 'Station created successfully.');
     }
 
     /**

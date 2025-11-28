@@ -21,15 +21,15 @@ class StationSeeder extends Seeder
             'flow_meter' => 0
         ]);
         Station::create([
-            'station_name' => 'FUEL FTM1001  (10 KL)',
+            'station_name' => 'FTM1001  (10 KL)',
             'flow_meter' => 0
         ]);
         Station::create([
-            'station_name' => 'FUEL FT TJP 01 (16 KL)',
+            'station_name' => 'FT TJP 01 (16 KL)',
             'flow_meter' => 0
         ]);
         Station::create([
-            'station_name' => 'FUEL FT TJP 02 (16 KL)',
+            'station_name' => 'FT TJP 02 (16 KL)',
             'flow_meter' => 0
         ]);
     }

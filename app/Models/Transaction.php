@@ -45,15 +45,18 @@ class Transaction extends Model
         return \Carbon\Carbon::parse($this->transaction_time)->format('H:i');
     }
 
-    // ✅ Boot method untuk generate UUID
+    // ✅ Boot method untuk generate custom ID
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($model) {
-            // Generate UUID otomatis jika belum di-set
+            // Jika primary key belum di-set, generate ID custom
             if (empty($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = (string) Str::uuid();
+                // Angka random 10 digit (bisa disesuaikan)
+                $randomNumber = random_int(1000000000, 9999999999);
+
+                $model->{$model->getKeyName()} = 'GPU-' . $randomNumber;
             }
         });
     }
