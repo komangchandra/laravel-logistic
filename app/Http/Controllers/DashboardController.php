@@ -19,19 +19,21 @@ class DashboardController extends Controller
         // Remark yang diinginkan
         $remarksList = ['Coal Getting', 'Coal Hauling', 'CCP', 'OB Removal'];
 
-        // Ambil total volume per hari dan per remark
-        $transactions = Transaction::select(
-            DB::raw('DAY(transaction_date) as day'),
-            DB::raw("CASE 
-                            WHEN remarks IN ('Coal Getting','Coal Hauling','CCP','OB Removal') 
-                            THEN remarks ELSE 'Lainnya' END as remark"),
-            DB::raw('SUM(volume) as total_volume')  // <-- hitung total volume
-        )
-            ->whereYear('transaction_date', $year)
-            ->whereMonth('transaction_date', $month)
-            ->groupBy('day', 'remark')
-            ->orderBy('day')
-            ->get();
+        // // Ambil total volume per hari dan per remark
+        // $transactions = Transaction::select(
+        //     DB::raw('DAY(transaction_date) as day'),
+        //     DB::raw("CASE 
+        //                     WHEN remarks IN ('Coal Getting','Coal Hauling','CCP','OB Removal') 
+        //                     THEN remarks ELSE 'Lainnya' END as remark"),
+        //     DB::raw('SUM(volume) as total_volume')  
+        // )
+        //     ->whereYear('transaction_date', $year)
+        //     ->whereMonth('transaction_date', $month)
+        //     ->groupBy('day', 'remark')
+        //     ->orderBy('day')
+        //     ->get();
+
+        $transactions = Transaction::all();
 
         // Siapkan array data per remark
         $data = [];
